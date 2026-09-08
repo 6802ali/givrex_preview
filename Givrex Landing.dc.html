@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&amp;family=Cairo:wght@500;600;700&amp;family=Work+Sans:wght@400;500;600&amp;family=Almarai:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FBF7EE; }
+  * { box-sizing: border-box; }
+  a { color: #1E3A2B; text-decoration: none; }
+  a:hover { color: #8A6516; }
+  input, select, textarea, button { font: inherit; color: inherit; }
+</style>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="background: #FBF7EE; color: #1E3A2B; font-family: 'Work Sans', 'Almarai', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;">
+
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(22,41,31,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(251,247,238,0.16);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 12px 28px; display: flex; align-items: center; gap: 28px;">
+      <a href="#top" style="display: flex; align-items: center;">
+        <img src="assets/givrex-logo.png" alt="Givrex — since 1978" style="height: 54px; width: auto; display: block;">
+      </a>
+      <nav style="display: flex; align-items: center; gap: 24px; margin-inline-start: auto; flex-wrap: wrap;">
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="4">
+          <a href="{{ item.href }}" style="font-size: 14.5px; font-weight: 500; color: rgba(251,247,238,0.82);" style-hover="color: #E0B14E;">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button onClick="{{ toggleLang }}" style="background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; padding: 9px 16px; font-size: 13px; font-weight: 600; cursor: pointer; letter-spacing: 0.02em; color: #FBF7EE;" style-hover="border-color: #E0B14E; color: #E0B14E;">{{ t.langToggle }}</button>
+        <a href="#quote" style="display: inline-flex; align-items: center; gap: 8px; background: #E0B14E; color: #16291F; padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 16px;">→</span></a>
+      </div>
+    </div>
+  </header>
+
+  <section id="top" style="position: relative; background: #24452F; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(150deg, #2C5133 0%, #38672F 52%, #4C8A2E 100%);"></div>
+    <div style="position: relative; max-width: 1240px; margin: 0 auto; padding: 84px 28px 92px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 22px;">
+        <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #E0B14E;">{{ t.heroEyebrow }}</span>
+        <h1 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(36px, 4.6vw, 60px); line-height: 1.08; letter-spacing: -0.015em; color: #FBF7EE; text-wrap: pretty;">{{ t.heroTitle }}</h1>
+        <p style="margin: 0; max-width: 520px; font-size: 17.5px; line-height: 1.65; color: rgba(251,247,238,0.85);">{{ t.heroSub }}</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;">
+          <a href="#quote" style="display: inline-flex; align-items: center; gap: 10px; background: #E0B14E; color: #16291F; padding: 14px 30px; border-radius: 999px; font-weight: 600; font-size: 15px;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.heroCta1 }}<span style="font-size: 17px;">→</span></a>
+          <a href="Givrex%20Products.dc.html" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(251,247,238,0.45); color: #FBF7EE; padding: 14px 30px; border-radius: 999px; font-weight: 600; font-size: 15px;" style-hover="border-color: #E0B14E; color: #E0B14E;">{{ t.heroCta2 }}<span style="font-size: 17px;">→</span></a>
+        </div>
+      </div>
+      <div style="position: relative; display: flex; align-items: flex-start; justify-content: center; padding: 0 0 24px;">
+        
+        <img src="assets/pack-artichoke.png" alt="Givrex frozen artichoke bottoms, 400 g" style="position: relative; z-index: 2; width: 62%; max-width: 400px; min-width: 160px; height: auto; display: block; transform: rotate(-9deg); filter: drop-shadow(0 30px 40px rgba(11,22,16,0.42));"><img src="assets/pack-peas.png" alt="Givrex frozen green peas, 400 g" style="position: relative; z-index: 1; width: 62%; max-width: 400px; min-width: 160px; height: auto; display: block; margin-inline-start: -16%; margin-top: 14%; transform: rotate(9deg); filter: drop-shadow(0 30px 40px rgba(11,22,16,0.42));">
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 84px 28px 20px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 56px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 8px; height: 8px; background: #B08A2E; transform: rotate(45deg); display: block;"></span>
+          <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.introEyebrow }}</span>
+        </div>
+        <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.14; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.introTitle }} <span style="color: #8A6516;">{{ t.introTitleAccent }}</span></h2>
+        <p style="margin: 0; font-size: 16.5px; line-height: 1.7; color: rgba(30,58,43,0.78); max-width: 480px;">{{ t.introP1 }}</p>
+        <p style="margin: 0; font-size: 16.5px; line-height: 1.7; color: rgba(30,58,43,0.78); max-width: 480px;">{{ t.introP2 }}</p>
+        <a href="Givrex%20Products.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; background: #1E3A2B; color: #FBF7EE; padding: 14px 30px; border-radius: 999px; font-size: 15px; font-weight: 600; margin-top: 6px;" style-hover="background: #B08A2E; color: #16291F;">{{ t.introCta }}<span style="font-size: 17px;">→</span></a>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; padding: 34px 30px; box-shadow: 0 14px 40px rgba(22,41,31,0.07); display: flex; flex-direction: column; gap: 18px;">
+        <sc-for list="{{ t.credentials }}" as="item" hint-placeholder-count="4">
+          <div style="display: flex; align-items: flex-start; gap: 14px;">
+            <span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: #E7EFE4; color: #2C5133; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; line-height: 1;">✓</span>
+            <span style="font-size: 15.5px; font-weight: 600; color: #1E3A2B; line-height: 1.45;">{{ item }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 48px 28px 20px;">
+    <div ref="{{ statsRef }}" style="background: #1E3A2B; border-radius: 18px; padding: 38px 8px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px 0;">
+      <sc-for list="{{ stats }}" as="stat" hint-placeholder-count="4">
+        <div style="padding: 4px 26px; display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center; border-inline-start: {{ stat.rule }};">
+          <span style="font-family: 'Lora', 'Cairo', serif; font-size: clamp(36px, 3.8vw, 46px); font-weight: 600; line-height: 1; letter-spacing: -0.02em; color: #E0B14E; font-variant-numeric: tabular-nums;">{{ stat.display }}</span>
+          <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #FBF7EE; line-height: 1.5;">{{ stat.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+
+  <section id="products" style="background: #F3EDE0; border-block: 1px solid rgba(30,58,43,0.1);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 84px 28px 92px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 620px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width: 8px; height: 8px; background: #B08A2E; transform: rotate(45deg); display: block;"></span>
+            <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.productsEyebrow }}</span>
+          </div>
+          <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.14; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.productsTitle }} <span style="color: #8A6516;">{{ t.productsTitleAccent }}</span></h2>
+          <p style="margin: 0; max-width: 620px; font-size: 16.5px; line-height: 1.7; color: rgba(30,58,43,0.78);">{{ t.productsSub }}</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 24px;">
+        <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(22,41,31,0.07);" style-hover="border-color: rgba(30,58,43,0.28); box-shadow: 0 18px 46px rgba(22,41,31,0.12);">
+          <div style="aspect-ratio: 4 / 3; position: relative; overflow: hidden; background: #EDF0E2;">
+            <img src="assets/cat-vegetables.jpeg" alt="Fresh vegetables" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div style="padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+            <h3 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 23px; font-weight: 600;">{{ cat0.name }}</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(30,58,43,0.72); flex: 1;">{{ cat0.items }}</p>
+            <a href="Givrex%20Products.dc.html" style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516; margin-top: 4px;" style-hover="color: #1E3A2B;">{{ cat0.link }}</a>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(22,41,31,0.07);" style-hover="border-color: rgba(30,58,43,0.28); box-shadow: 0 18px 46px rgba(22,41,31,0.12);">
+          <div style="aspect-ratio: 4 / 3; position: relative; overflow: hidden; background: #F6E9E3;">
+            <img src="assets/cat-fruits.jpeg" alt="Fresh fruits" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div style="padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+            <h3 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 23px; font-weight: 600;">{{ cat1.name }}</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(30,58,43,0.72); flex: 1;">{{ cat1.items }}</p>
+            <a href="Givrex%20Products.dc.html" style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516; margin-top: 4px;" style-hover="color: #1E3A2B;">{{ cat1.link }}</a>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(22,41,31,0.07);" style-hover="border-color: rgba(30,58,43,0.28); box-shadow: 0 18px 46px rgba(22,41,31,0.12);">
+          <div style="aspect-ratio: 4 / 3; position: relative; overflow: hidden; background: #F3EBD9;">
+            <img src="assets/cat-meals.jpeg" alt="Frozen ready meals" style="width: 100%; height: 100%; object-fit: cover; object-position: 0% 50%; display: block;">
+          </div>
+          <div style="padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+            <h3 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 23px; font-weight: 600;">{{ cat2.name }}</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(30,58,43,0.72); flex: 1;">{{ cat2.items }}</p>
+            <a href="Givrex%20Products.dc.html" style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516; margin-top: 4px;" style-hover="color: #1E3A2B;">{{ cat2.link }}</a>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(22,41,31,0.07);" style-hover="border-color: rgba(30,58,43,0.28); box-shadow: 0 18px 46px rgba(22,41,31,0.12);">
+          <div style="aspect-ratio: 4 / 3; position: relative; overflow: hidden; background: #F4F0E1;">
+            <img src="assets/cat-soups.jpeg" alt="Ready-to-eat cream soups" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div style="padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+            <h3 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 23px; font-weight: 600;">{{ cat3.name }}</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(30,58,43,0.72); flex: 1;">{{ cat3.items }}</p>
+            <a href="Givrex%20Products.dc.html" style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516; margin-top: 4px;" style-hover="color: #1E3A2B;">{{ cat3.link }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="why" style="max-width: 1240px; margin: 0 auto; padding: 92px 28px 96px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 26px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 8px; height: 8px; background: #B08A2E; transform: rotate(45deg); display: block;"></span>
+          <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.whyEyebrow }}</span>
+        </div>
+        <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.whyTitle }}</h2>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <sc-for list="{{ t.why }}" as="row" hint-placeholder-count="3">
+            <div style="display: flex; gap: 18px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; padding: 26px 26px; box-shadow: 0 14px 40px rgba(22,41,31,0.07);">
+              <span style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: #E7EFE4; color: #2C5133; display: flex; align-items: center; justify-content: center; font-size: 13.5px; font-weight: 700; line-height: 1;">{{ row.num }}</span>
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <h3 style="margin: 0; font-size: 17.5px; font-weight: 600;">{{ row.title }}</h3>
+                <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(30,58,43,0.75); max-width: 470px;">{{ row.body }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="aspect-ratio: 4 / 5; position: relative; overflow: hidden; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; background: linear-gradient(160deg, #E6EDE4 0%, #CFDDD0 100%); box-shadow: 0 14px 40px rgba(22,41,31,0.07);">
+          <img src="assets/why-artichokes.jpeg" alt="Frozen artichoke hearts on stone" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        <div style="background: #1E3A2B; color: #FBF7EE; border-radius: 22px; padding: 28px 26px; display: flex; flex-direction: column; gap: 10px;">
+          <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #E0B14E;">{{ t.claimLabel }}</span>
+          <p style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: 21px; line-height: 1.35;">{{ t.claim }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="export" style="background: #1E3A2B; color: #FBF7EE;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 66px 28px 62px;">
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; max-width: 640px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 8px; height: 8px; background: #E0B14E; transform: rotate(45deg); display: block;"></span>
+          <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #E0B14E;">{{ t.exportEyebrow }}</span>
+        </div>
+        <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -0.015em; color: #FBF7EE;">{{ t.exportTitle }}</h2>
+        <p style="margin: 0; font-size: 16px; color: rgba(251,247,238,0.8);">{{ t.exportSub }}</p>
+      </div>
+      <div dir="ltr" style="position: relative; width: 100%; margin: 0 auto; aspect-ratio: 2 / 1; min-height: 440px; overflow: hidden;">
+        <iframe src="{{ mapSrc }}" title="Givrex export routes from Alexandria" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="quote" style="background: #F3EDE0; border-block: 1px solid rgba(30,58,43,0.1);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 92px 28px 100px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 8px; height: 8px; background: #B08A2E; transform: rotate(45deg); display: block;"></span>
+          <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.quoteEyebrow }}</span>
+        </div>
+        <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.quoteTitle }}</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.65; color: rgba(30,58,43,0.78); max-width: 450px;">{{ t.quoteSub }}</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px; font-size: 15px;">
+          <sc-for list="{{ t.contactLines }}" as="line" hint-placeholder-count="3">
+            <div style="display: flex; gap: 12px;">
+              <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6516; min-width: 82px; padding-top: 2px;">{{ line.label }}</span>
+              <span style="color: rgba(30,58,43,0.9);"><span style="direction: ltr; unicode-bidi: plaintext; display: inline-block;">{{ line.value }}</span></span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; padding: 34px 32px; box-shadow: 0 14px 40px rgba(22,41,31,0.07);">
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 28px 0; align-items: flex-start;">
+            <span style="width: 30px; height: 30px; border-radius: 50%; background: #E7EFE4; color: #2C5133; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; line-height: 1;">✓</span>
+            <span style="font-family: 'Lora', 'Cairo', serif; font-size: 25px; font-weight: 600;">{{ t.formDoneTitle }}</span>
+            <p style="margin: 0; font-size: 15.5px; color: rgba(30,58,43,0.75);">{{ t.formDoneBody }}</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submit }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px;">
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6516;">{{ t.f.company }}</span>
+              <input required="true" style="border: 1px solid rgba(30,58,43,0.16); background: #FBF7EE; border-radius: 10px; padding: 12px 14px; font-size: 15.5px; width: 100%; outline: none;">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6516;">{{ t.f.name }}</span>
+              <input required="true" style="border: 1px solid rgba(30,58,43,0.16); background: #FBF7EE; border-radius: 10px; padding: 12px 14px; font-size: 15.5px; width: 100%; outline: none;">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6516;">{{ t.f.email }}</span>
+              <input type="email" required="true" style="border: 1px solid rgba(30,58,43,0.16); background: #FBF7EE; border-radius: 10px; padding: 12px 14px; font-size: 15.5px; width: 100%; outline: none;">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6516;">{{ t.f.country }}</span>
+              <input style="border: 1px solid rgba(30,58,43,0.16); background: #FBF7EE; border-radius: 10px; padding: 12px 14px; font-size: 15.5px; width: 100%; outline: none;">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px; grid-column: 1 / -1;">
+              <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6516;">{{ t.f.interest }}</span>
+              <select style="border: 1px solid rgba(30,58,43,0.16); background: #FBF7EE; border-radius: 10px; padding: 12px 14px; font-size: 15.5px; width: 100%; outline: none;">
+                <sc-for list="{{ t.f.interestOptions }}" as="opt" hint-placeholder-count="5">
+                  <option>{{ opt }}</option>
+                </sc-for>
+              </select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px; grid-column: 1 / -1;">
+              <span style="font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6516;">{{ t.f.volume }}</span>
+              <textarea rows="3" style="border: 1px solid rgba(30,58,43,0.16); background: #FBF7EE; border-radius: 10px; padding: 12px 14px; font-size: 15.5px; width: 100%; outline: none; resize: vertical; font-family: inherit;"></textarea>
+            </label>
+            <button type="submit" style="grid-column: 1 / -1; justify-self: start; display: inline-flex; align-items: center; gap: 10px; background: #1E3A2B; color: #FBF7EE; border: none; border-radius: 999px; padding: 14px 30px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 4px;" style-hover="background: #B08A2E; color: #16291F;">{{ t.f.submit }}<span style="font-size: 17px;">→</span></button>
+          </form>
+        </sc-if>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: #16291F; color: rgba(251,247,238,0.75);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 60px 28px 34px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+        <img src="assets/givrex-logo.png" alt="Givrex — since 1978" style="height: 72px; width: auto; display: block;">
+        <span style="font-size: 14.5px; line-height: 1.6; white-space: pre-line;">{{ t.footerAddress }}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="width: 7px; height: 7px; background: #E0B14E; transform: rotate(45deg); display: block; flex: none;"></span>
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerShowsLabel }}</span>
+        </div>
+        <sc-for list="{{ t.shows }}" as="show" hint-placeholder-count="2">
+          <span style="font-size: 14.5px; line-height: 1.55;">{{ show }}</span>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="width: 7px; height: 7px; background: #E0B14E; transform: rotate(45deg); display: block; flex: none;"></span>
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerNavLabel }}</span>
+        </div>
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="4">
+          <a href="{{ item.href }}" style="font-size: 14.5px; font-weight: 500; color: rgba(251,247,238,0.78);" style-hover="color: #E0B14E;">{{ item.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="width: 7px; height: 7px; background: #E0B14E; transform: rotate(45deg); display: block; flex: none;"></span>
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerContactLabel }}</span>
+        </div>
+        <span style="font-size: 14.5px;">export@givrex.com</span>
+        <span style="font-size: 14.5px;"><span style="direction: ltr; unicode-bidi: embed; display: inline-block;">+20 3 420 0000</span></span>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(251,247,238,0.14);">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 18px 28px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251,247,238,0.5);">
+        <span>{{ t.footerLegal }}</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;ar&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'ar'&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+const EN = {
+  langToggle: "العربية",
+  cta: "Request a quote",
+  nav: [
+    { label: "Products", href: "Givrex%20Products.dc.html" },
+    { label: "About us", href: "Givrex%20About.dc.html" },
+    { label: "Export reach", href: "#export" },
+    { label: "Contact", href: "#quote" }
+  ],
+  heroEyebrow: "Since 1978 · Alexandria, Egypt",
+  heroTitle: "Egypt's frozen harvest, delivered to the world",
+  heroSub: "Family-owned since 1978, Givrex grows, processes, and exports premium frozen vegetables, fruits, and ready meals from Egypt's Nile Delta to over 30 countries.",
+  heroCta1: "Request a quote",
+  heroCta2: "View our products",
+  introEyebrow: "About Givrex",
+  introTitle: "Rooted in the Nile Delta",
+  introTitleAccent: "since 1978",
+  introP1: "Givrex was founded in 1978 by Robert Mansour, a pioneer of Egypt's frozen food industry whose roots in food export trace back to the 1950s. What began as a small operation producing green beans, carrots, spinach, and artichokes has grown into an established exporter of premium frozen fruits and vegetables, sourced from the fertile Nile Delta near Alexandria.",
+  introP2: "Today the company is led by the second generation of the Mansour family: Patrick, who oversees production and operations, Eric, who leads sales and marketing, and Monique, the financial controller. Together they carry forward their father's founding principle: \u201cDo it well, otherwise don't do it at all.\u201d",
+  introCta: "View our products",
+  credentials: [
+    "Family-owned and operated since 1978",
+    "The widest artichoke range in the region, with 10 varieties",
+    "Exporting to over 30 countries worldwide",
+    "A regular exhibitor at SIAL Paris and Anuga Cologne"
+  ],
+  stats: [
+    { num: 45, pre: "", post: "+", label: "Years in business", note: "" },
+    { num: 90, pre: "", post: "%", label: "Of production exported worldwide", note: "" },
+    { num: 10, pre: "", post: "", label: "Artichoke varieties, the most in the Middle East", note: "" },
+    { num: 30, pre: "", post: "+", label: "Countries served", note: "" }
+  ],
+  productsEyebrow: "Product Range",
+  productsTitle: "From our fields",
+  productsTitleAccent: "to your freezer",
+  productsSub: "Four ranges, individually quick-frozen and packed to buyer specification in retail, catering and industrial formats.",
+  categories: [
+    { name: "Frozen Vegetables", items: "Artichokes, fava beans, cut green beans, okra, spinach, broccoli, cauliflower, sweet corn, taro, molokhia, sweet potatoes, grilled eggplant, onions, and gourmet turned vegetables. IQF frozen to lock in flavor, color, and nutrients.", link: "View catalogue", slot: "givrex-vegetables", photo: "Drop the vegetables photo — trimmed artichoke hearts", ground: "linear-gradient(155deg, #EDF0E2 0%, #D7E0C6 100%)" },
+    { name: "Frozen Fruits", items: "Higher brix strawberries, pomegranate arils, red figs, guava, apricots, mango pulp, and Zaghloul dates. Harvested at peak ripeness and frozen for year round supply.", link: "View catalogue", slot: "givrex-fruits", photo: "Drop the fruits photo — whole frozen strawberries", ground: "linear-gradient(155deg, #F6E9E3 0%, #EBD3C6 100%)" },
+    { name: "Ready Meals", items: "Falafel paste and semi fried falafel, plus other value added frozen items for foodservice and retail.", link: "View catalogue", slot: "givrex-meals", photo: "Drop the ready meals photo — falafel patties", ground: "linear-gradient(155deg, #F3EBD9 0%, #E4D3B0 100%)" },
+    { name: "Ready to Eat Soups", items: "Yellow lentil, broccoli artichoke, and broad bean cream soups. Restaurant quality, ready in minutes.", link: "View catalogue", slot: "givrex-soups", photo: "Drop the soup photo — artichoke cream soup", ground: "linear-gradient(155deg, #F4F0E1 0%, #DFE3C9 100%)" }
+  ],
+  whyEyebrow: "Why Givrex",
+  whyTitle: "Why food companies choose Givrex",
+  why: [
+    { num: "01", title: "Decades of expertise", body: "Pioneering Egypt's frozen vegetable and fruit industry since 1978." },
+    { num: "02", title: "Agronomist oversight", body: "Agronomists and technical experts oversee every field before harvest." },
+    { num: "03", title: "Ongoing investment in production", body: "Including automated leaf-processing lines and modern freezing equipment." }
+  ],
+  claimLabel: "On the record",
+  claim: "The widest artichoke range in the region, with 10 varieties from bottoms to hearts, halves, dices, and triangles.",
+  exportEyebrow: "Export reach",
+  exportTitle: "Serving tables across the globe",
+  exportSub: "Givrex exports to Europe, North and South America, Australia, Japan, the GCC, and other Arab nations, alongside a strong presence in the domestic Egyptian market. The company's regular participation in SIAL and Anuga keeps it closely connected to buyers across these regions.",
+  regions: [
+    { name: "Europe", markets: "France, Germany, Italy, Spain, Netherlands, United Kingdom" },
+    { name: "North America", markets: "United States, Canada" },
+    { name: "GCC & Arab markets", markets: "Saudi Arabia, UAE, Kuwait, Qatar, Jordan, Lebanon" },
+    { name: "Asia-Pacific", markets: "Japan, Australia" },
+    { name: "Egypt", markets: "Retail, hotel and catering supply nationwide" }
+  ],
+  quoteEyebrow: "Request a quote",
+  quoteTitle: "Ready to bring Givrex to your market?",
+  quoteSub: "Whether you're sourcing for retail, foodservice, or industrial use, our team is ready to talk specifications, volumes, and shipping.",
+  contactLines: [
+    { label: "Office", value: "Alexandria, Egypt" },
+    { label: "Email", value: "export@givrex.com" },
+    { label: "Phone", value: "+20 3 420 0000" }
+  ],
+  f: {
+    company: "Company", name: "Contact name", email: "Email", country: "Country",
+    interest: "Product interest", volume: "Volume and requirements",
+    interestOptions: ["Vegetables", "Fruits", "Ready meals", "Soup creams", "Full catalogue"],
+    submit: "Send enquiry"
+  },
+  formDoneTitle: "Enquiry received",
+  formDoneBody: "Thank you. Our export team will reply within two working days.",
+  footerAddress: "Givrex\nAlexandria, Egypt",
+  footerShowsLabel: "We exhibit at",
+  shows: ["SIAL, Paris", "Anuga, Cologne"],
+  footerNavLabel: "Site",
+  footerContactLabel: "Export enquiries",
+  footerLegal: "© 2026 Givrex. All rights reserved."
+};
+
+const AR = {
+  langToggle: "English",
+  cta: "اطلب عرض سعر",
+  nav: [
+    { label: "منتجاتنا", href: "Givrex%20Products.dc.html" },
+    { label: "عن الشركة", href: "Givrex%20About.dc.html" },
+    { label: "أسواق التصدير", href: "#export" },
+    { label: "تواصل معنا", href: "#quote" }
+  ],
+  heroEyebrow: "منذ ١٩٧٨ · الإسكندرية، مصر",
+  heroTitle: "حصاد مصر المجمّد، إلى العالم",
+  heroSub: "شركة عائلية منذ ١٩٧٨، تزرع جيفركس وتصنّع وتصدّر خضروات وفواكه وأطباقًا جاهزة مجمّدة فاخرة من دلتا النيل في مصر إلى أكثر من ٣٠ دولة.",
+  heroCta1: "اطلب عرض سعر",
+  heroCta2: "شاهد منتجاتنا",
+  introEyebrow: "عن جيفركس",
+  introTitle: "جذورنا في دلتا النيل",
+  introTitleAccent: "منذ ١٩٧٨",
+  introP1: "تأسست جيفركس عام ١٩٧٨ على يد روبرت منصور، أحد رواد صناعة الأغذية المجمدة في مصر، وتعود جذوره في تصدير الأغذية إلى خمسينيات القرن الماضي. وما بدأ كعملية صغيرة لإنتاج الفاصوليا الخضراء والجزر والسبانخ والخرشوف أصبح مصدّرًا راسخًا لفواكه وخضروات مجمدة فاخرة، مصدرها أراضي دلتا النيل الخصبة قرب الإسكندرية.",
+  introP2: "يقود الشركة اليوم الجيل الثاني من عائلة منصور: باتريك، المسؤول عن الإنتاج والتشغيل، وإريك، الذي يقود المبيعات والتسويق، ومونيك، المراقبة المالية. ويحملون معًا مبدأ والدهم المؤسس: «أتقن العمل، وإلا فلا تفعله.»",
+  introCta: "شاهد منتجاتنا",
+  credentials: [
+    "شركة عائلية تُدار بالعائلة منذ ١٩٧٨",
+    "أوسع مجموعة خرشوف في المنطقة، بعشرة أصناف",
+    "تصدير إلى أكثر من ٣٠ دولة حول العالم",
+    "مشاركة دائمة في سيال باريس وأنوغا كولونيا"
+  ],
+  stats: [
+    { num: 45, pre: "+", post: "", label: "عامًا في السوق", note: "" },
+    { num: 90, pre: "", post: "٪", label: "من الإنتاج يُصدَّر إلى العالم", note: "" },
+    { num: 10, pre: "", post: "", label: "أصناف خرشوف، الأكثر في الشرق الأوسط", note: "" },
+    { num: 30, pre: "+", post: "", label: "دولة نخدمها", note: "" }
+  ],
+  productsEyebrow: "قائمة المنتجات",
+  productsTitle: "من حقولنا",
+  productsTitleAccent: "إلى مجمّدك",
+  productsSub: "أربع مجموعات، تُجمَّد تجميدًا سريعًا فرديًا وتُعبَّأ حسب مواصفات العميل في عبوات التجزئة والتغذية والصناعة.",
+  categories: [
+    { name: "خضروات مجمّدة", items: "خرشوف، فول، فاصوليا خضراء مقطّعة، بامية، سبانخ، بروكلي، قرنبيط، ذرة حلوة، قلقاس، ملوخية، بطاطا حلوة، باذنجان مشوي، بصل، وخضروات مخروطة فاخرة. تجميد سريع فردي يحفظ الطعم واللون والقيمة الغذائية.", link: "عرض الكتالوج", slot: "givrex-vegetables", photo: "أضف صورة الخضروات — قلوب خرشوف", ground: "linear-gradient(155deg, #EDF0E2 0%, #D7E0C6 100%)" },
+    { name: "فواكه مجمّدة", items: "فراولة عالية البركس، حبّ الرمان، تين أحمر، جوافة، مشمش، لبّ مانجو، وبلح زغلول. تُحصد في ذروة نضجها وتُجمَّد لتوريد على مدار العام.", link: "عرض الكتالوج", slot: "givrex-fruits", photo: "أضف صورة الفواكه — فراولة مجمّدة", ground: "linear-gradient(155deg, #F6E9E3 0%, #EBD3C6 100%)" },
+    { name: "أطباق جاهزة", items: "عجينة طعمية وطعمية نصف مقلية، إضافة إلى منتجات مجمّدة أخرى ذات قيمة مضافة لقطاع التغذية والتجزئة.", link: "عرض الكتالوج", slot: "givrex-meals", photo: "أضف صورة الأطباق الجاهزة — أقراص طعمية", ground: "linear-gradient(155deg, #F3EBD9 0%, #E4D3B0 100%)" },
+    { name: "شوربات جاهزة للتناول", items: "شوربات كريمية من العدس الأصفر، والبروكلي بالخرشوف، والفول. بجودة المطاعم وجاهزة في دقائق.", link: "عرض الكتالوج", slot: "givrex-soups", photo: "أضف صورة الشوربة — شوربة كريمة الخرشوف", ground: "linear-gradient(155deg, #F4F0E1 0%, #DFE3C9 100%)" }
+  ],
+  whyEyebrow: "لماذا جيفركس",
+  whyTitle: "لماذا تختار شركات الأغذية جيفركس",
+  why: [
+    { num: "٠١", title: "عقود من الخبرة", body: "من رواد صناعة الخضروات والفواكه المجمدة في مصر منذ عام ١٩٧٨." },
+    { num: "٠٢", title: "إشراف المهندسين الزراعيين", body: "مهندسون زراعيون وخبراء فنيون يشرفون على كل حقل قبل الحصاد." },
+    { num: "٠٣", title: "استثمار مستمر في الإنتاج", body: "يشمل خطوطًا آلية لتصنيع الأوراق ومعدات تجميد حديثة." }
+  ],
+  claimLabel: "حقيقة موثقة",
+  claim: "أوسع مجموعة خرشوف في المنطقة، بعشرة أصناف من القواعد والقلوب إلى الأنصاف والمكعبات والمثلثات.",
+  exportEyebrow: "أسواق التصدير",
+  exportTitle: "نخدم الموائد في مختلف أنحاء العالم",
+  exportSub: "تصدّر جيفركس إلى أوروبا وأمريكا الشمالية والجنوبية وأستراليا واليابان والخليج والدول العربية الأخرى، مع حضور قوي في السوق المصري المحلي. وتحافظ مشاركتها المنتظمة في سيال وأنوغا على صلة قريبة بالمستوردين في هذه المناطق.",
+  regions: [
+    { name: "أوروبا", markets: "فرنسا، ألمانيا، إيطاليا، إسبانيا، هولندا، المملكة المتحدة" },
+    { name: "أمريكا الشمالية", markets: "الولايات المتحدة، كندا" },
+    { name: "الخليج والأسواق العربية", markets: "السعودية، الإمارات، الكويت، قطر، الأردن، لبنان" },
+    { name: "آسيا والمحيط الهادئ", markets: "اليابان، أستراليا" },
+    { name: "مصر", markets: "التجزئة والفنادق والتغذية في جميع المحافظات" }
+  ],
+  quoteEyebrow: "اطلب عرض سعر",
+  quoteTitle: "جاهز لتقديم جيفركس في سوقك؟",
+  quoteSub: "سواء كنت تشتري للتجزئة أو التغذية أو الاستخدام الصناعي، فريقنا جاهز للحديث في المواصفات والكميات والشحن.",
+  contactLines: [
+    { label: "المكتب", value: "الإسكندرية، مصر" },
+    { label: "البريد", value: "export@givrex.com" },
+    { label: "الهاتف", value: "+20 3 420 0000" }
+  ],
+  f: {
+    company: "الشركة", name: "اسم المسؤول", email: "البريد الإلكتروني", country: "الدولة",
+    interest: "المنتج المطلوب", volume: "الكمية والمتطلبات",
+    interestOptions: ["خضروات", "فواكه", "أطباق جاهزة", "شوربات كريمية", "الكتالوج الكامل"],
+    submit: "إرسال الطلب"
+  },
+  formDoneTitle: "تم استلام طلبك",
+  formDoneBody: "شكرًا لك. سيتواصل فريق التصدير معك خلال يومي عمل.",
+  footerAddress: "جيفركس\nالإسكندرية، مصر",
+  footerShowsLabel: "نشارك في",
+  shows: ["سيال، باريس", "أنوغا، كولونيا"],
+  footerNavLabel: "الموقع",
+  footerContactLabel: "طلبات التصدير",
+  footerLegal: "© ٢٠٢٦ جيفركس. جميع الحقوق محفوظة."
+};
+
+const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
+const toArabicDigits = (n) => String(n).replace(/[0-9]/g, (d) => AR_DIGITS[+d]);
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { lang: props.lang === "ar" ? "ar" : "en", sent: false, progress: 1 };
+    this.statsRef = React.createRef();
+    this.armed = false;
+  }
+  arm(el) {
+    if (this.armed || !el || typeof IntersectionObserver === "undefined") return;
+    this.armed = true;
+    // only zero the figures once we know frames actually tick in this context
+    requestAnimationFrame(() => {
+      this.setState({ progress: 0 });
+      this.observer = new IntersectionObserver((entries) => {
+        if (entries.some(e => e.isIntersecting)) { this.observer.disconnect(); this.runCount(); }
+      }, { threshold: 0.35 });
+      this.observer.observe(el);
+      this.failsafe = setTimeout(() => { if (this.state.progress < 1) this.setState({ progress: 1 }); }, 1200);
+    });
+  }
+  componentWillUnmount() {
+    if (this.observer) this.observer.disconnect();
+    if (this.failsafe) clearTimeout(this.failsafe);
+    if (this.settle) clearTimeout(this.settle);
+    if (this.raf) cancelAnimationFrame(this.raf);
+  }
+  runCount() {
+    if (this.failsafe) clearTimeout(this.failsafe);
+    const DUR = 1500, t0 = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / DUR);
+      this.setState({ progress: 1 - Math.pow(1 - p, 3) });
+      if (p < 1) this.raf = requestAnimationFrame(step);
+    };
+    this.raf = requestAnimationFrame(step);
+    // guarantee the final figures even if frames stop mid-tween
+    this.settle = setTimeout(() => this.setState({ progress: 1 }), DUR + 400);
+  }
+  renderVals() {
+    const lang = this.state.lang;
+    const t = lang === "ar" ? AR : EN;
+    const p = this.state.progress;
+    const stats = t.stats.map((s, i) => {
+      const shown = Math.round(s.num * p);
+      return {
+        label: s.label,
+        note: s.note,
+        rule: i === 0 ? "none" : "1px solid rgba(251,247,238,0.16)",
+        display: s.pre + (lang === "ar" ? toArabicDigits(shown) : shown) + s.post
+      };
+    });
+    return {
+      lang,
+      dir: lang === "ar" ? "rtl" : "ltr",
+      mapSrc: "export-map.html?lang=" + lang,
+      t,
+      cat0: t.categories[0],
+      cat1: t.categories[1],
+      cat2: t.categories[2],
+      cat3: t.categories[3],
+      stats,
+      statsRef: (el) => { this.statsRef.current = el; if (el) this.arm(el); },
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      toggleLang: () => this.setState(s => ({ lang: s.lang === "ar" ? "en" : "ar" })),
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

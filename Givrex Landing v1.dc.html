@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Cairo:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FBF7EE; }
+  * { box-sizing: border-box; }
+  a { color: #1E3A2B; text-decoration: none; }
+  a:hover { color: #A9553A; }
+  input, select, textarea, button { font: inherit; color: inherit; }
+</style>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="background: #FBF7EE; color: #1E3A2B; font-family: 'IBM Plex Sans', 'IBM Plex Sans Arabic', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;">
+
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(251,247,238,0.94); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(30,58,43,0.12);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 16px 28px; display: flex; align-items: center; gap: 28px;">
+      <a href="#top" style="display: flex; flex-direction: column; gap: 1px; line-height: 1.15;">
+        <span style="font-family: 'Source Serif 4', 'Cairo', serif; font-weight: 700; font-size: 24px; letter-spacing: 0.01em;">{{ t.brand }}</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(30,58,43,0.55);">{{ t.brandFormal }}</span>
+      </a>
+      <nav style="display: flex; align-items: center; gap: 24px; margin-inline-start: auto; flex-wrap: wrap;">
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="4">
+          <a href="{{ item.href }}" style="font-size: 14.5px; font-weight: 500; color: rgba(30,58,43,0.78);" style-hover="color: #A9553A;">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button onClick="{{ toggleLang }}" style="background: none; border: 1px solid rgba(30,58,43,0.25); border-radius: 2px; padding: 7px 12px; font-size: 13px; font-weight: 500; cursor: pointer; letter-spacing: 0.02em;" style-hover="border-color: #1E3A2B; background: rgba(30,58,43,0.05);">{{ t.langToggle }}</button>
+        <a href="#quote" style="background: #1E3A2B; color: #FBF7EE; padding: 9px 18px; border-radius: 2px; font-size: 14px; font-weight: 500; white-space: nowrap;" style-hover="background: #A9553A; color: #FBF7EE;">{{ t.cta }}</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="top" style="position: relative; min-height: 620px; display: flex; align-items: flex-end; background: #16291F; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 13px); background-color: #1E3A2B;"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(11,22,16,0.92) 0%, rgba(11,22,16,0.35) 55%, rgba(11,22,16,0.5) 100%);"></div>
+    <div style="position: absolute; top: 20px; inset-inline-end: 24px; max-width: 240px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; line-height: 1.6; letter-spacing: 0.1em; color: rgba(251,247,238,0.5); border: 1px dashed rgba(251,247,238,0.3); padding: 5px 9px;">{{ t.heroPhoto }}</div>
+    <div style="position: relative; max-width: 1240px; width: 100%; margin: 0 auto; padding: 120px 28px 64px;">
+      <div style="max-width: 720px; display: flex; flex-direction: column; gap: 22px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #E0B14E;">{{ t.heroEyebrow }}</span>
+        <h1 style="margin: 0; font-family: 'Source Serif 4', 'Cairo', serif; font-weight: 600; font-size: clamp(38px, 5.4vw, 68px); line-height: 1.08; letter-spacing: -0.015em; color: #FBF7EE; text-wrap: pretty;">{{ t.heroTitle }}</h1>
+        <p style="margin: 0; max-width: 560px; font-size: 17.5px; line-height: 1.65; color: rgba(251,247,238,0.82);">{{ t.heroSub }}</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;">
+          <a href="#quote" style="background: #FBF7EE; color: #1E3A2B; padding: 13px 24px; border-radius: 2px; font-weight: 500; font-size: 15px;" style-hover="background: #E0B14E; color: #16291F;">{{ t.heroCta1 }}</a>
+          <a href="#products" style="border: 1px solid rgba(251,247,238,0.45); color: #FBF7EE; padding: 13px 24px; border-radius: 2px; font-weight: 500; font-size: 15px;" style-hover="border-color: #FBF7EE; background: rgba(251,247,238,0.1); color: #FBF7EE;">{{ t.heroCta2 }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height: 7px; background-image: repeating-linear-gradient(90deg, #A9553A 0 3px, transparent 3px 10px, #E0B14E 10px 13px, transparent 13px 20px); background-color: #1E3A2B;"></div>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 0 28px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border-bottom: 1px solid rgba(30,58,43,0.14);">
+      <sc-for list="{{ t.stats }}" as="stat" hint-placeholder-count="3">
+        <div style="padding: 44px 24px 40px; display: flex; flex-direction: column; gap: 6px; border-inline-start: 1px solid rgba(30,58,43,0.14);">
+          <span style="font-family: 'Source Serif 4', 'Cairo', serif; font-size: clamp(38px, 4.4vw, 54px); font-weight: 600; line-height: 1; letter-spacing: -0.02em;">{{ stat.value }}</span>
+          <span style="font-size: 14.5px; font-weight: 500;">{{ stat.label }}</span>
+          <span style="font-size: 13.5px; color: rgba(30,58,43,0.6); line-height: 1.5;">{{ stat.note }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 52px 28px;">
+    <blockquote style="margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+      <p style="margin: 0; font-family: 'Source Serif 4', 'Cairo', serif; font-style: italic; font-size: clamp(22px, 2.6vw, 31px); line-height: 1.35; max-width: 860px; text-wrap: pretty;">{{ t.motto }}</p>
+      <cite style="font-style: normal; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(30,58,43,0.6);">{{ t.mottoBy }}</cite>
+    </blockquote>
+  </section>
+
+  <section id="products" style="background: #F4EEE1; border-block: 1px solid rgba(30,58,43,0.12);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 76px 28px 84px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 10px; max-width: 560px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #A9553A;">{{ t.productsEyebrow }}</span>
+          <h2 style="margin: 0; font-family: 'Source Serif 4', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -0.015em;">{{ t.productsTitle }}</h2>
+        </div>
+        <p style="margin: 0; max-width: 380px; font-size: 15.5px; color: rgba(30,58,43,0.72);">{{ t.productsSub }}</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 24px;">
+        <sc-for list="{{ t.categories }}" as="cat" hint-placeholder-count="4">
+          <a href="#quote" style="display: flex; flex-direction: column; background: #FBF7EE; border: 1px solid rgba(30,58,43,0.14); border-radius: 3px; overflow: hidden;" style-hover="border-color: #1E3A2B; box-shadow: 0 10px 30px rgba(22,41,31,0.1);">
+            <div style="aspect-ratio: 4 / 3; position: relative; background-color: #E7DFCD; background-image: repeating-linear-gradient(115deg, rgba(30,58,43,0.09) 0 2px, transparent 2px 12px); display: flex; align-items: center; justify-content: center;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.09em; color: rgba(30,58,43,0.55); text-align: center; padding: 0 16px; line-height: 1.5;">{{ cat.photo }}</span>
+            </div>
+            <div style="padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+              <h3 style="margin: 0; font-family: 'Source Serif 4', 'Cairo', serif; font-size: 23px; font-weight: 600;">{{ cat.name }}</h3>
+              <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(30,58,43,0.7); flex: 1;">{{ cat.items }}</p>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9553A; margin-top: 4px;">{{ cat.link }}</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" style="max-width: 1240px; margin: 0 auto; padding: 84px 28px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 26px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #A9553A;">{{ t.whyEyebrow }}</span>
+        <h2 style="margin: 0; font-family: 'Source Serif 4', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.whyTitle }}</h2>
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ t.why }}" as="row" hint-placeholder-count="3">
+            <div style="display: flex; gap: 18px; padding: 22px 0; border-top: 1px solid rgba(30,58,43,0.16);">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #A9553A; padding-top: 4px;">{{ row.num }}</span>
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <h3 style="margin: 0; font-size: 17.5px; font-weight: 600;">{{ row.title }}</h3>
+                <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(30,58,43,0.75); max-width: 470px;">{{ row.body }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="aspect-ratio: 4 / 5; position: relative; background-color: #E7DFCD; background-image: repeating-linear-gradient(115deg, rgba(30,58,43,0.09) 0 2px, transparent 2px 12px); border: 1px solid rgba(30,58,43,0.14); display: flex; align-items: flex-end; padding: 20px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.09em; color: rgba(30,58,43,0.55); line-height: 1.5;">{{ t.whyPhoto }}</span>
+        </div>
+        <div style="background: #1E3A2B; color: #FBF7EE; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #E0B14E;">{{ t.claimLabel }}</span>
+          <p style="margin: 0; font-family: 'Source Serif 4', 'Cairo', serif; font-size: 21px; line-height: 1.3;">{{ t.claim }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="export" style="background: #1E3A2B; color: #FBF7EE;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 28px;">
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 44px; max-width: 620px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #E0B14E;">{{ t.exportEyebrow }}</span>
+        <h2 style="margin: 0; font-family: 'Source Serif 4', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -0.015em; color: #FBF7EE;">{{ t.exportTitle }}</h2>
+        <p style="margin: 0; font-size: 16px; color: rgba(251,247,238,0.78);">{{ t.exportSub }}</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); border-top: 1px solid rgba(251,247,238,0.18);">
+        <sc-for list="{{ t.regions }}" as="reg" hint-placeholder-count="5">
+          <div style="background: #1E3A2B; padding: 26px 22px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid rgba(251,247,238,0.18); border-inline-end: 1px solid rgba(251,247,238,0.18);">
+            <span style="font-family: 'Source Serif 4', 'Cairo', serif; font-size: 19px; font-weight: 600; color: #FBF7EE;">{{ reg.name }}</span>
+            <span style="font-size: 14px; line-height: 1.55; color: rgba(251,247,238,0.72);">{{ reg.markets }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="quote" style="max-width: 1240px; margin: 0 auto; padding: 84px 28px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #A9553A;">{{ t.quoteEyebrow }}</span>
+        <h2 style="margin: 0; font-family: 'Source Serif 4', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.quoteTitle }}</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.65; color: rgba(30,58,43,0.75); max-width: 440px;">{{ t.quoteSub }}</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px; font-size: 15px;">
+          <sc-for list="{{ t.contactLines }}" as="line" hint-placeholder-count="3">
+            <div style="display: flex; gap: 12px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(30,58,43,0.55); min-width: 74px; padding-top: 3px;">{{ line.label }}</span>
+              <span style="color: rgba(30,58,43,0.85);">{{ line.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background: #F4EEE1; border: 1px solid rgba(30,58,43,0.14); border-radius: 3px; padding: 30px;">
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 28px 0;">
+            <span style="font-family: 'Source Serif 4', 'Cairo', serif; font-size: 24px; font-weight: 600;">{{ t.formDoneTitle }}</span>
+            <p style="margin: 0; font-size: 15.5px; color: rgba(30,58,43,0.75);">{{ t.formDoneBody }}</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submit }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px;">
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(30,58,43,0.6);">{{ t.f.company }}</span>
+              <input required="true" style="border: 1px solid rgba(30,58,43,0.22); background: #FBF7EE; border-radius: 2px; padding: 11px 12px; font-size: 15px; width: 100%;" />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(30,58,43,0.6);">{{ t.f.name }}</span>
+              <input required="true" style="border: 1px solid rgba(30,58,43,0.22); background: #FBF7EE; border-radius: 2px; padding: 11px 12px; font-size: 15px; width: 100%;" />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(30,58,43,0.6);">{{ t.f.email }}</span>
+              <input type="email" required="true" style="border: 1px solid rgba(30,58,43,0.22); background: #FBF7EE; border-radius: 2px; padding: 11px 12px; font-size: 15px; width: 100%;" />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(30,58,43,0.6);">{{ t.f.country }}</span>
+              <input style="border: 1px solid rgba(30,58,43,0.22); background: #FBF7EE; border-radius: 2px; padding: 11px 12px; font-size: 15px; width: 100%;" />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px; grid-column: 1 / -1;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(30,58,43,0.6);">{{ t.f.interest }}</span>
+              <select style="border: 1px solid rgba(30,58,43,0.22); background: #FBF7EE; border-radius: 2px; padding: 11px 12px; font-size: 15px; width: 100%;">
+                <sc-for list="{{ t.f.interestOptions }}" as="opt" hint-placeholder-count="4">
+                  <option>{{ opt }}</option>
+                </sc-for>
+              </select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 7px; grid-column: 1 / -1;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(30,58,43,0.6);">{{ t.f.volume }}</span>
+              <textarea rows="3" style="border: 1px solid rgba(30,58,43,0.22); background: #FBF7EE; border-radius: 2px; padding: 11px 12px; font-size: 15px; width: 100%; resize: vertical; font-family: inherit;"></textarea>
+            </label>
+            <button type="submit" style="grid-column: 1 / -1; background: #1E3A2B; color: #FBF7EE; border: none; border-radius: 2px; padding: 14px 20px; font-size: 15px; font-weight: 500; cursor: pointer;" style-hover="background: #A9553A;">{{ t.f.submit }}</button>
+          </form>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: #16291F; color: rgba(251,247,238,0.75);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 60px 28px 34px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-family: 'Source Serif 4', 'Cairo', serif; font-size: 24px; font-weight: 700; color: #FBF7EE;">{{ t.brand }}</span>
+        <span style="font-size: 14px; line-height: 1.6;">{{ t.footerAddress }}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerShowsLabel }}</span>
+        <sc-for list="{{ t.shows }}" as="show" hint-placeholder-count="2">
+          <span style="font-size: 14px; line-height: 1.5;">{{ show }}</span>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerNavLabel }}</span>
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="4">
+          <a href="{{ item.href }}" style="font-size: 14px; color: rgba(251,247,238,0.75);" style-hover="color: #E0B14E;">{{ item.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerContactLabel }}</span>
+        <span style="font-size: 14px;">export@givrex.com</span>
+        <span style="font-size: 14px; direction: ltr; unicode-bidi: embed;">+20 3 420 0000</span>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(251,247,238,0.14);">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 18px 28px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251,247,238,0.5);">
+        <span>{{ t.footerLegal }}</span>
+        <span>{{ t.footerMotto }}</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;ar&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'ar'&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+const EN = {
+  brand: "Givrex",
+  brandFormal: "Robert Mansour & Co.",
+  langToggle: "العربية",
+  cta: "Request a quote",
+  nav: [
+    { label: "Products", href: "#products" },
+    { label: "Why Givrex", href: "#why" },
+    { label: "Export reach", href: "#export" },
+    { label: "Contact", href: "#quote" }
+  ],
+  heroEyebrow: "Est. 1978 · Smouha, Alexandria",
+  heroTitle: "Egyptian Frozen Fruits & Vegetables Since 1978",
+  heroSub: "A family-owned IQF producer in Alexandria, supplying importers, distributors and wholesale buyers across four continents. Over 90% of our output is exported.",
+  heroCta1: "Request a quote",
+  heroCta2: "See product range",
+  heroPhoto: "PHOTO — Nile Delta artichoke field at harvest, full-bleed 2400×1400",
+  stats: [
+    { value: "45+", label: "Years in production", note: "Founded 1978, second generation today" },
+    { value: "90%", label: "Of output exported", note: "Europe, North America, GCC, Asia-Pacific" },
+    { value: "10", label: "Artichoke varieties", note: "Oldest artichoke producer in the Middle East" }
+  ],
+  motto: "“Do it well, otherwise don't do it at all.”",
+  mottoBy: "Robert Mansour, founder",
+  productsEyebrow: "What we make",
+  productsTitle: "Four ranges, one specification standard",
+  productsSub: "Individually quick-frozen, packed to buyer spec in retail, catering and industrial formats.",
+  categories: [
+    { name: "Vegetables", items: "Artichokes, fava beans, gourmet turned vegetables, sweet potatoes, grilled peppers, roasted eggplant, okra, green beans, spinach, molokhia.", link: "View catalogue", photo: "PHOTO — trimmed artichoke hearts, natural light" },
+    { name: "Fruits", items: "Strawberries, apricots, figs, dates, mango and guava pulp.", link: "View catalogue", photo: "PHOTO — whole strawberries, natural light" },
+    { name: "Ready meals", items: "Falafel and prepared vegetable preparations, portioned and ready to fry or heat.", link: "View catalogue", photo: "PHOTO — falafel patties on tray" },
+    { name: "Soup creams", items: "Ready-to-eat artichoke, lentil, broccoli and leek cream soups.", link: "View catalogue", photo: "PHOTO — artichoke cream soup, overhead" }
+  ],
+  whyEyebrow: "Why Givrex",
+  whyTitle: "Built on contract farming, cold chain, and one family's name",
+  why: [
+    { num: "01", title: "Sourced from the Nile Delta", body: "Long-standing contracts with Delta growers, fields audited through the season and crops harvested to our own maturity windows." },
+    { num: "02", title: "IQF within hours of harvest", body: "Produce is cleaned, graded and individually quick-frozen the same day, so texture, colour and yield arrive intact at destination." },
+    { num: "03", title: "Family-owned, second generation", body: "Founded by Robert Mansour in 1978 and run today by Eric Mansour (marketing and sales) and Monique Mansour (financial controller)." }
+  ],
+  whyPhoto: "PHOTO — processing line, IQF tunnel, portrait 4:5",
+  claimLabel: "On the record",
+  claim: "The oldest artichoke producer in the Middle East, with up to ten processed varieties.",
+  exportEyebrow: "Export reach",
+  exportTitle: "Shipping from Alexandria to more than 20 markets",
+  exportSub: "Documentation, labelling and pack formats prepared per destination.",
+  regions: [
+    { name: "Europe", markets: "France, Germany, Italy, Spain, Netherlands, United Kingdom" },
+    { name: "North America", markets: "United States, Canada" },
+    { name: "GCC & Arab markets", markets: "Saudi Arabia, UAE, Kuwait, Qatar, Jordan, Lebanon" },
+    { name: "Asia-Pacific", markets: "Japan, Australia" },
+    { name: "Egypt", markets: "Retail, hotel and catering supply nationwide" }
+  ],
+  quoteEyebrow: "Request a quote",
+  quoteTitle: "Tell us the product and the volume",
+  quoteSub: "We reply to trade enquiries within two working days with specifications, pack options and FOB Alexandria pricing.",
+  contactLines: [
+    { label: "Office", value: "Smouha, Alexandria, Egypt" },
+    { label: "Email", value: "export@givrex.com" },
+    { label: "Phone", value: "+20 3 420 0000" }
+  ],
+  f: {
+    company: "Company", name: "Contact name", email: "Email", country: "Country",
+    interest: "Product interest", volume: "Volume and requirements",
+    interestOptions: ["Vegetables", "Fruits", "Ready meals", "Soup creams", "Full catalogue"],
+    submit: "Send enquiry"
+  },
+  formDoneTitle: "Enquiry received",
+  formDoneBody: "Thank you. Our export team will be in touch within two working days.",
+  footerAddress: "Robert Mansour & Co.\nSmouha, Alexandria, Egypt",
+  footerShowsLabel: "We exhibit at",
+  shows: ["SIAL — Paris", "Anuga — Cologne"],
+  footerNavLabel: "Site",
+  footerContactLabel: "Export enquiries",
+  footerLegal: "© 2026 Robert Mansour & Co. (Givrex)",
+  footerMotto: "Do it well, otherwise don't do it at all."
+};
+
+const AR = {
+  brand: "جيفركس",
+  brandFormal: "روبرت منصور وشركاه",
+  langToggle: "English",
+  cta: "اطلب عرض سعر",
+  nav: [
+    { label: "منتجاتنا", href: "#products" },
+    { label: "لماذا جيفركس", href: "#why" },
+    { label: "أسواق التصدير", href: "#export" },
+    { label: "تواصل معنا", href: "#quote" }
+  ],
+  heroEyebrow: "تأسست عام ١٩٧٨ · سموحة، الإسكندرية",
+  heroTitle: "فواكه وخضروات مصرية مجمّدة منذ ١٩٧٨",
+  heroSub: "شركة عائلية للتجميد السريع الفردي في الإسكندرية، تورّد للمستوردين والموزعين وتجار الجملة في أربع قارات. أكثر من ٩٠٪ من إنتاجنا يُصدَّر خارج مصر.",
+  heroCta1: "اطلب عرض سعر",
+  heroCta2: "تعرّف على منتجاتنا",
+  heroPhoto: "صورة — حقل خرشوف في دلتا النيل وقت الحصاد",
+  stats: [
+    { value: "+٤٥", label: "عامًا من الإنتاج", note: "تأسست ١٩٧٨، ويديرها الجيل الثاني اليوم" },
+    { value: "٩٠٪", label: "من الإنتاج للتصدير", note: "أوروبا، أمريكا الشمالية، الخليج، آسيا والمحيط الهادئ" },
+    { value: "١٠", label: "أصناف من الخرشوف", note: "أقدم منتج للخرشوف في الشرق الأوسط" }
+  ],
+  motto: "«أتقن العمل، وإلا فلا تفعله.»",
+  mottoBy: "روبرت منصور، المؤسس",
+  productsEyebrow: "ماذا ننتج",
+  productsTitle: "أربع مجموعات بمعيار مواصفات واحد",
+  productsSub: "تجميد سريع فردي، وتعبئة حسب مواصفات العميل في عبوات التجزئة والتغذية والصناعة.",
+  categories: [
+    { name: "خضروات", items: "خرشوف، فول، خضروات مخروطة، بطاطا حلوة، فلفل مشوي، باذنجان مشوي، بامية، فاصوليا خضراء، سبانخ، ملوخية.", link: "عرض الكتالوج", photo: "صورة — قلوب خرشوف منظّفة" },
+    { name: "فواكه", items: "فراولة، مشمش، تين، بلح، لبّ المانجو والجوافة.", link: "عرض الكتالوج", photo: "صورة — فراولة كاملة" },
+    { name: "أطباق جاهزة", items: "طعمية وتحضيرات خضروات جاهزة للقلي أو التسخين.", link: "عرض الكتالوج", photo: "صورة — أقراص طعمية" },
+    { name: "شوربات كريمية", items: "شوربات كريمية جاهزة للتناول: خرشوف، عدس، بروكلي، كُرّاث.", link: "عرض الكتالوج", photo: "صورة — شوربة كريمة الخرشوف" }
+  ],
+  whyEyebrow: "لماذا جيفركس",
+  whyTitle: "زراعة تعاقدية، سلسلة تبريد متصلة، واسم عائلة واحد",
+  why: [
+    { num: "٠١", title: "من قلب دلتا النيل", body: "تعاقدات طويلة الأمد مع مزارعي الدلتا، ومتابعة للحقول طوال الموسم، وحصاد وفق مواعيد نضج نحددها بأنفسنا." },
+    { num: "٠٢", title: "تجميد سريع خلال ساعات من الحصاد", body: "تُغسل المحاصيل وتُفرز وتُجمَّد تجميدًا سريعًا فرديًا في اليوم نفسه، فيصل القوام واللون والوزن سليمًا إلى وجهته." },
+    { num: "٠٣", title: "شركة عائلية بالجيل الثاني", body: "أسسها روبرت منصور عام ١٩٧٨، ويديرها اليوم إريك منصور (التسويق والمبيعات) ومونيك منصور (المراقبة المالية)." }
+  ],
+  whyPhoto: "صورة — خط الإنتاج ونفق التجميد السريع",
+  claimLabel: "حقيقة موثقة",
+  claim: "أقدم منتج للخرشوف في الشرق الأوسط، بما يصل إلى عشرة أصناف مصنّعة.",
+  exportEyebrow: "أسواق التصدير",
+  exportTitle: "نصدّر من الإسكندرية إلى أكثر من ٢٠ سوقًا",
+  exportSub: "المستندات والملصقات وأشكال التعبئة تُعد وفق كل سوق.",
+  regions: [
+    { name: "أوروبا", markets: "فرنسا، ألمانيا، إيطاليا، إسبانيا، هولندا، المملكة المتحدة" },
+    { name: "أمريكا الشمالية", markets: "الولايات المتحدة، كندا" },
+    { name: "الخليج والأسواق العربية", markets: "السعودية، الإمارات، الكويت، قطر، الأردن، لبنان" },
+    { name: "آسيا والمحيط الهادئ", markets: "اليابان، أستراليا" },
+    { name: "مصر", markets: "التجزئة والفنادق والتغذية في جميع المحافظات" }
+  ],
+  quoteEyebrow: "اطلب عرض سعر",
+  quoteTitle: "أخبرنا بالمنتج والكمية",
+  quoteSub: "نرد على طلبات التجارة خلال يومي عمل بالمواصفات وأشكال التعبئة والسعر فوب الإسكندرية.",
+  contactLines: [
+    { label: "المكتب", value: "سموحة، الإسكندرية، مصر" },
+    { label: "البريد", value: "export@givrex.com" },
+    { label: "الهاتف", value: "+20 3 420 0000" }
+  ],
+  f: {
+    company: "الشركة", name: "اسم المسؤول", email: "البريد الإلكتروني", country: "الدولة",
+    interest: "المنتج المطلوب", volume: "الكمية والمتطلبات",
+    interestOptions: ["خضروات", "فواكه", "أطباق جاهزة", "شوربات كريمية", "الكتالوج الكامل"],
+    submit: "إرسال الطلب"
+  },
+  formDoneTitle: "تم استلام طلبك",
+  formDoneBody: "شكرًا لك. سيتواصل فريق التصدير معك خلال يومي عمل.",
+  footerAddress: "روبرت منصور وشركاه\nسموحة، الإسكندرية، مصر",
+  footerShowsLabel: "نشارك في",
+  shows: ["سيال — باريس", "أنوغا — كولونيا"],
+  footerNavLabel: "الموقع",
+  footerContactLabel: "طلبات التصدير",
+  footerLegal: "© ٢٠٢٦ روبرت منصور وشركاه (جيفركس)",
+  footerMotto: "أتقن العمل، وإلا فلا تفعله."
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { lang: props.lang === "ar" ? "ar" : "en", sent: false };
+  }
+  renderVals() {
+    const lang = this.state.lang;
+    const t = lang === "ar" ? AR : EN;
+    return {
+      lang,
+      dir: lang === "ar" ? "rtl" : "ltr",
+      t,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      toggleLang: () => this.setState(s => ({ lang: s.lang === "ar" ? "en" : "ar" })),
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
