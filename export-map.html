@@ -17,8 +17,9 @@
 <body>
 <svg id="map"></svg>
 <script>
-const LANG = new URLSearchParams(location.search).get("lang") === "ar" ? "ar" : "en";
-const ORIGIN = { name: "ALEXANDRIA", ar: "الإسكندرية", lon: 29.92, lat: 31.2 };
+const Q = new URLSearchParams(location.search).get("lang");
+const LANG = (Q === "ar" || Q === "fr") ? Q : "en";
+const ORIGIN = { name: "ALEXANDRIA", ar: "الإسكندرية", fr: "ALEXANDRIE", lon: 29.92, lat: 31.2 };
 const AR = {
   "Canada": "كندا", "United States": "الولايات المتحدة", "United Kingdom": "المملكة المتحدة",
   "Netherlands": "هولندا", "Germany": "ألمانيا", "France": "فرنسا", "Spain": "إسبانيا",
@@ -26,7 +27,15 @@ const AR = {
   "Qatar": "قطر", "UAE": "الإمارات", "Saudi Arabia": "السعودية", "Japan": "اليابان",
   "Australia": "أستراليا"
 };
-const nm = (d) => LANG === "ar" ? (AR[d.name] || d.name) : d.name;
+const FR = {
+  "Canada": "Canada", "United States": "États-Unis", "United Kingdom": "Royaume-Uni",
+  "Netherlands": "Pays-Bas", "Germany": "Allemagne", "France": "France", "Spain": "Espagne",
+  "Italy": "Italie", "Lebanon": "Liban", "Jordan": "Jordanie", "Kuwait": "Koweït",
+  "Qatar": "Qatar", "UAE": "Émirats arabes unis", "Saudi Arabia": "Arabie saoudite",
+  "Japan": "Japon", "Australia": "Australie"
+};
+const TABLE = { ar: AR, fr: FR };
+const nm = (d) => (TABLE[LANG] && TABLE[LANG][d.name]) || d.name;
 const DEST = [
   { name: "Canada",         lon: -79.4,  lat: 43.7,  dx: -8,  dy: -14, anchor: "end" },
   { name: "United States",  lon: -74.0,  lat: 40.7,  dx: -8,  dy: 14,  anchor: "end" },
@@ -65,10 +74,29 @@ function render(countries) {
   W = rect.width; H = rect.height;
   svg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
 
-  const padL = Math.max(30, W * 0.05), padR = Math.max(44, W * 0.07);
-  const projection = d3.geoNaturalEarth1().fitExtent([[padL, 6], [W - padR, H - 6]], countries);
-  projection.scale(projection.scale() * 1.24);
-  const k = Math.max(0.72, Math.min(1, W / 900));
+  const small = W < 620;
+  const padL = small ? 10 : Math.max(30, W * 0.05);
+  const padR = small ? 16 : Math.max(44, W * 0.07);
+  const padY = small ? 2 : 6;
+  // Fit the whole world inside the frame, reserving room for label ascenders, then
+  // fill any leftover width by nudging the scale only as far as the height allows.
+  const labelPad = small ? 16 : 22;
+  const projection = d3.geoNaturalEarth1()
+    .fitExtent([[padL, padY + labelPad], [W - padR, H - padY - labelPad]], countries);
+  const fitted = d3.geoPath(projection).bounds(countries);
+  const usedW = fitted[1][0] - fitted[0][0], usedH = fitted[1][1] - fitted[0][1];
+  const availW = W - padL - padR, availH = H - (padY + labelPad) * 2;
+  const grow = Math.max(1, Math.min(availW / usedW, availH / usedH));
+  if (grow > 1.001) {
+    projection.scale(projection.scale() * grow);
+    const b2 = d3.geoPath(projection).bounds(countries);
+    const t = projection.translate();
+    projection.translate([
+      t[0] + (W - (b2[0][0] + b2[1][0])) / 2,
+      t[1] + (H - (b2[0][1] + b2[1][1])) / 2
+    ]);
+  }
+  const k = Math.max(0.86, Math.min(1, W / 900));
   const fs = Math.round(11 * k * 10) / 10;
   svg.attr("data-k", k);
   const path = d3.geoPath(projection);
@@ -134,7 +162,7 @@ function render(countries) {
   hub.append("text").attr("class", "lbl-origin")
     .attr("x", o[0]).attr("y", o[1] + 32 * k).attr("text-anchor", "middle")
     .style("font-size", Math.round(12.5 * k * 10) / 10 + "px")
-    .text(LANG === "ar" ? ORIGIN.ar : ORIGIN.name);
+    .text(ORIGIN[LANG] || ORIGIN.name);
 }
 
 d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json").then(topo => {

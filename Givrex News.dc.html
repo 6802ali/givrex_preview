@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Cairo:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FBF7EE; }
+  * { box-sizing: border-box; }
+  a { color: #1E3A2B; text-decoration: none; }
+  a:hover { color: #8A6516; }
+  input, select, textarea, button { font: inherit; color: inherit; }
+</style>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="background: #FBF7EE; color: #1E3A2B; font-family: 'Work Sans', 'Almarai', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;">
+
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(22,41,31,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(251,247,238,0.16);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; gap: 20px;">
+      <a href="Givrex%20Landing.dc.html" style="display: flex; align-items: center; flex: none;">
+        <img src="assets/givrex-logo.png" alt="Givrex, since 1978" style="height: 62px; width: auto; max-height: 12vw; display: block;" />
+      </a>
+      <div style="margin-inline-start: auto; display: flex; align-items: center; gap: 20px; min-width: 0;">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <nav style="display: flex; flex-wrap: nowrap; align-items: center; column-gap: clamp(10px, 1.3vw, 22px); min-width: 0;">
+            <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
+              <a href="{{ item.href }}" style="font-size: 14px; font-weight: 500; color: {{ item.color }}; border-bottom: {{ item.rule }}; padding-bottom: 3px; white-space: nowrap;" style-hover="color: #E0B14E;">{{ item.label }}</a>
+            </sc-for>
+          </nav>
+        </sc-if>
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <div style="position: relative; flex: none;">
+            <button onClick="{{ toggleLangMenu }}" aria-haspopup="listbox" aria-expanded="{{ langOpen }}" style="display: flex; align-items: center; gap: 8px; background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; padding: 7px 13px; cursor: pointer; color: #FBF7EE; font-size: 13px; font-weight: 600; white-space: nowrap;" style-hover="border-color: #E0B14E; color: #E0B14E;">
+              <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span></sc-if>
+              <sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span></sc-if>
+              <sc-if value="{{ isAr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span></sc-if>
+              <span>{{ langLabel }}</span>
+              <span style="font-size: 9px; opacity: 0.75;">▼</span>
+            </button>
+            <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+              <div role="listbox" style="position: absolute; top: calc(100% + 10px); inset-inline-end: 0; background: #FBF7EE; border: 1px solid rgba(30,58,43,0.14); border-radius: 14px; box-shadow: 0 18px 44px rgba(11,22,16,0.28); padding: 6px; min-width: 196px; z-index: 40; display: flex; flex-direction: column; gap: 2px;">
+                <button onClick="{{ langEn.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langEn.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langEn.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span><span>English</span></button>
+                <button onClick="{{ langFr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langFr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langFr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span><span>Français</span></button>
+                <button onClick="{{ langAr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langAr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langAr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span><span>العربية</span></button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <a href="Givrex%20Landing.dc.html#quote" style="display: inline-flex; align-items: center; gap: 8px; background: #E0B14E; color: #16291F; padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap; flex: none;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 16px;">→</span></a>
+        </sc-if>
+        <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menuOpen }}" style="width: 44px; height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; cursor: pointer; flex: none;" style-hover="border-color: #E0B14E;">
+            <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+            <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+            <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+          </button>
+        </sc-if>
+      </div>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top: 1px solid rgba(251,247,238,0.16); padding: 14px 20px 20px; display: flex; flex-direction: column; gap: 4px;">
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
+          <a href="{{ item.href }}" onClick="{{ closeMenu }}" style="font-size: 16px; font-weight: 500; color: rgba(251,247,238,0.88); padding: 12px 4px; border-bottom: 1px solid rgba(251,247,238,0.1);" style-hover="color: #E0B14E;">{{ item.label }}</a>
+        </sc-for>
+        <div style="display: flex; gap: 8px; margin-top: 14px;">
+          <button onClick="{{ langEn.on }}" style="flex: 1; background: {{ langEn.drawerBg }}; color: {{ langEn.drawerColor }}; border: 1px solid {{ langEn.drawerBorder }}; border-radius: 999px; padding: 10px; font-size: 14px; font-weight: {{ langEn.weight }}; cursor: pointer;">EN</button>
+          <button onClick="{{ langFr.on }}" style="flex: 1; background: {{ langFr.drawerBg }}; color: {{ langFr.drawerColor }}; border: 1px solid {{ langFr.drawerBorder }}; border-radius: 999px; padding: 10px; font-size: 14px; font-weight: {{ langFr.weight }}; cursor: pointer;">FR</button>
+          <button onClick="{{ langAr.on }}" style="flex: 1; background: {{ langAr.drawerBg }}; color: {{ langAr.drawerColor }}; border: 1px solid {{ langAr.drawerBorder }}; border-radius: 999px; padding: 10px; font-size: 14px; font-weight: {{ langAr.weight }}; cursor: pointer;">ع</button>
+        </div>
+        <a href="Givrex%20Landing.dc.html#quote" onClick="{{ closeMenu }}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: #E0B14E; color: #16291F; padding: 12px 26px; border-radius: 999px; font-size: 15px; font-weight: 600; margin-top: 14px;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 16px;">→</span></a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section id="top" style="position: relative; background: #24452F; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(150deg, #2C5133 0%, #38672F 52%, #4C8A2E 100%);"></div>
+    <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(102deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 15px);"></div>
+    <div style="position: relative; max-width: 1240px; margin: 0 auto; padding: 58px clamp(18px, 4vw, 28px) 62px; display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #E0B14E;">{{ t.eyebrow }}</span>
+      </div>
+      <h1 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(32px, 4.2vw, 52px); line-height: 1.1; letter-spacing: -0.015em; color: #FBF7EE; max-width: 860px; text-wrap: pretty;">{{ t.title }}</h1>
+      <p style="margin: 0; max-width: 680px; font-size: 16.5px; line-height: 1.7; color: rgba(251,247,238,0.85);">{{ t.sub }}</p>
+      <p style="margin: 0; max-width: 680px; font-size: 16.5px; line-height: 1.7; color: rgba(251,247,238,0.85);">{{ t.sub2 }}</p>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 52px clamp(18px, 4vw, 28px) 0;">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px;">
+      <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.latestLabel }}</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px;">
+      <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(22,41,31,0.07);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(30,58,43,0.1);">
+          <img src="assets/news/anuga2019-1.jpg" alt="ANUGA 2019 stand" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+          <img src="assets/news/anuga2019-2.jpg" alt="ANUGA 2019 stand" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+          <img src="assets/news/anuga2019-3.jpg" alt="ANUGA 2019 display" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+          <img src="assets/news/anuga2019-4.jpg" alt="ANUGA 2019 display" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+        </div>
+        <div style="padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px;">
+          <span style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516;">{{ t.f0.meta }}</span>
+          <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 25px; font-weight: 600; line-height: 1.22;">{{ t.f0.name }}</h2>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(30,58,43,0.75);">{{ t.f0.body }}</p>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(22,41,31,0.07);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(30,58,43,0.1);">
+          <img src="assets/news/sial2018-1.jpg" alt="SIAL Paris 2018 stand" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+          <img src="assets/news/sial2018-2.jpg" alt="SIAL Paris 2018 stand" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+          <img src="assets/news/sial2018-3.jpg" alt="SIAL Paris 2018 tasting" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+          <img src="assets/news/sial2018-4.jpg" alt="SIAL Paris 2018 team" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+        </div>
+        <div style="padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px;">
+          <span style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516;">{{ t.f1.meta }}</span>
+          <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 25px; font-weight: 600; line-height: 1.22;">{{ t.f1.name }}</h2>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(30,58,43,0.75);">{{ t.f1.body }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 44px clamp(18px, 4vw, 28px) 0;">
+    <div style="background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(22,41,31,0.07);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; background: rgba(30,58,43,0.1);">
+        <img src="assets/news/gulf2019-1.jpg" alt="Gulfood 2019 stand" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+        <img src="assets/news/gulf2019-2.jpg" alt="Gulfood 2019 delegation" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+        <img src="assets/news/gulf2019-3.jpg" alt="Gulfood 2019 visitor" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+        <img src="assets/news/gulf2019-4.jpg" alt="Gulfood 2019 product display" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;" />
+      </div>
+      <div style="padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 10px; max-width: 780px;">
+        <span style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516;">{{ t.f2.meta }}</span>
+        <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 25px; font-weight: 600; line-height: 1.22;">{{ t.f2.name }}</h2>
+        <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(30,58,43,0.75);">{{ t.f2.body }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 56px clamp(18px, 4vw, 28px) 20px;">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px;">
+      <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.archiveLabel }}</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px;">
+      <sc-for list="{{ archive }}" as="a" hint-placeholder-count="8">
+        <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 18px; overflow: hidden; box-shadow: 0 10px 28px rgba(22,41,31,0.06);" style-hover="border-color: rgba(30,58,43,0.3); box-shadow: 0 16px 38px rgba(22,41,31,0.12);">
+          <img src="{{ a.img }}" alt="{{ a.name }}" style="width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block;" />
+          <div style="padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 7px; flex: 1;">
+            <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516;">{{ a.year }}</span>
+            <h3 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 19px; font-weight: 600; line-height: 1.25;">{{ a.name }}</h3>
+            <span style="font-size: 14px; color: rgba(30,58,43,0.7);">{{ a.place }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 46px clamp(18px, 4vw, 28px) 20px;">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px;">
+      <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.momentsLabel }}</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;">
+      <img src="assets/news/fair1.jpg" alt="Givrex at an international food fair" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 18px; border: 1px solid rgba(30,58,43,0.1);" />
+      <img src="assets/news/fair2.jpg" alt="Givrex team on stage at a trade event" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 18px; border: 1px solid rgba(30,58,43,0.1);" />
+      <img src="assets/news/fair4.jpg" alt="Evening reception at a trade event" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 18px; border: 1px solid rgba(30,58,43,0.1);" />
+      <img src="assets/news/fair5.jpg" alt="Performance at a trade event" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 18px; border: 1px solid rgba(30,58,43,0.1);" />
+    </div>
+  </section>
+
+  <section style="background: #1E3A2B; color: #FBF7EE; margin-top: 56px;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 62px clamp(18px, 4vw, 28px) 66px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 30px;">
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 620px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #E0B14E;">{{ t.ctaEyebrow }}</span>
+        </div>
+        <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(26px, 3vw, 38px); line-height: 1.14; letter-spacing: -0.015em; color: #FBF7EE;">{{ t.ctaTitle }}</h2>
+        <p style="margin: 0; font-size: 16.5px; line-height: 1.7; color: rgba(251,247,238,0.82);">{{ t.ctaSub }}</p>
+      </div>
+      <a href="Givrex%20Landing.dc.html#quote" style="display: inline-flex; align-items: center; gap: 10px; background: #E0B14E; color: #16291F; padding: 15px 32px; border-radius: 999px; font-size: 15.5px; font-weight: 600;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.ctaButton }}<span style="font-size: 17px;">→</span></a>
+    </div>
+  </section>
+
+  <footer style="background: #16291F; color: rgba(251,247,238,0.75);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 56px clamp(18px, 4vw, 28px) 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+        <img src="assets/givrex-logo.png" alt="Givrex, since 1978" style="height: 66px; width: auto; display: block;" />
+        <span style="font-size: 14.5px; line-height: 1.6; white-space: pre-line;">{{ t.footerAddress }}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerShowsLabel }}</span>
+        </div>
+        <sc-for list="{{ t.shows }}" as="show" hint-placeholder-count="2">
+          <span style="font-size: 14.5px; line-height: 1.55;">{{ show }}</span>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerNavLabel }}</span>
+        </div>
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
+          <a href="{{ item.href }}" style="font-size: 14.5px; font-weight: 500; color: rgba(251,247,238,0.78);" style-hover="color: #E0B14E;">{{ item.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerContactLabel }}</span>
+        </div>
+        <span style="font-size: 14.5px;">info@givrex.com</span>
+        <span style="font-size: 14.5px;"><span style="direction: ltr; unicode-bidi: embed; display: inline-block;">+(203) 424-4000</span></span>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(251,247,238,0.14);">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 18px clamp(18px, 4vw, 28px); font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251,247,238,0.5);">
+        <span>{{ t.footerLegal }}</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fr&quot;,&quot;ar&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'fr' | 'ar'&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+const L = "Givrex%20Landing.dc.html";
+const P = "Givrex%20Products.dc.html";
+const C = "Givrex%20Certifications.dc.html";
+const N = "Givrex%20News.dc.html";
+const DIM = "rgba(251,247,238,0.82)";
+const ON = "#E0B14E";
+
+const IMG = {
+  anuga2015: "assets/news/anuga2015.jpg",
+  sial2014: "assets/news/sial2014.jpg",
+  anuga2013: "assets/news/anuga2013.jpg",
+  sial2012: "assets/news/sial2012.jpg",
+  sialParis: "assets/news/sial-paris.jpg",
+  anuga2009: "assets/news/anuga2009.jpg",
+  sial2008: "assets/news/sial2008.jpg",
+  cibus2006: "assets/news/cibus2006.jpg"
+};
+
+const EN = {
+  cta: "Request a quote",
+  nav: [
+    { label: "Products", href: "Givrex%20Products.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Certifications", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Recipes", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "News & Fairs", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
+    { label: "About us", href: "Givrex%20About.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Export reach", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Contact", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
+  ],
+  eyebrow: "Food shows",
+  title: "Givrex is present in the main international fairs",
+  sub: "It is always a pleasure to receive you at our stand in upcoming international exhibitions.",
+  sub2: "We are regular participants in exhibitions worldwide, whether in America, Europe, the Middle East or the Far East. Some of those memorable events:",
+  latestLabel: "Most recent",
+  f0: { meta: "Cologne, Germany", name: "ANUGA 2019", body: "The most recent Givrex stand at Anuga, showing the full frozen vegetable, fruit and prepared range." },
+  f1: { meta: "Paris, France", name: "SIAL 2018", body: "Forty years after the factory was established, Givrex received buyers at its SIAL Paris stand with the complete frozen range." },
+  f2: { meta: "Dubai, United Arab Emirates", name: "Gulfood", body: "Givrex is a regular participant in exhibitions worldwide, whether in America, Europe, the Middle East or the Far East." },
+  archiveLabel: "Earlier exhibitions",
+  archive: [
+    { key: "anuga2015", year: "2015", name: "ANUGA", place: "Cologne, Germany" },
+    { key: "sial2014", year: "2014", name: "SIAL Paris", place: "Paris, France" },
+    { key: "anuga2013", year: "2013", name: "ANUGA", place: "Cologne, Germany" },
+    { key: "sial2012", year: "2012", name: "SIAL Paris", place: "Paris, France" },
+    { key: "sialParis", year: "2010", name: "SIAL Paris", place: "Paris, France" },
+    { key: "anuga2009", year: "2009", name: "ANUGA", place: "Cologne, Germany" },
+    { key: "sial2008", year: "2008", name: "SIAL Paris", place: "Paris, France" },
+    { key: "cibus2006", year: "2006", name: "CIBUS", place: "Parma, Italy" }
+  ],
+  momentsLabel: "From the fairs",
+  ctaEyebrow: "Meet us",
+  ctaTitle: "It is always a pleasure to receive you at our stand",
+  ctaSub: "Your questions and comments are important to us. Please contact us by email and we will get back to you as soon as possible.",
+  ctaButton: "Contact us",
+  footerAddress: "Givrex\nAlexandria, Egypt",
+  footerShowsLabel: "We exhibit at",
+  shows: ["SIAL, Paris", "Anuga, Cologne", "Gulfood, Dubai"],
+  footerNavLabel: "Site",
+  footerContactLabel: "Contact us",
+  footerLegal: "© 2026 Givrex. All rights reserved."
+};
+
+const FR = {
+  cta: "Demander une offre",
+  nav: [
+    { label: "Produits", href: "Givrex%20Products.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Certifications", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Recettes", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Actualités", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
+    { label: "À propos", href: "Givrex%20About.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Exportation", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Contact", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
+  ],
+  eyebrow: "Actualités",
+  title: "Givrex est présent sur les principaux salons internationaux",
+  sub: "C'est toujours un plaisir de vous recevoir sur notre stand lors des prochaines expositions internationales.",
+  sub2: "Nous participons régulièrement à des salons dans le monde entier, en Amérique, en Europe, au Moyen-Orient et en Extrême-Orient. Quelques-uns de ces moments marquants :",
+  latestLabel: "Les plus récents",
+  f0: { meta: "Cologne, Allemagne", name: "ANUGA 2019", body: "Notre plus grand stand Anuga à ce jour, présentant toute la gamme de légumes, fruits et plats préparés surgelés au sein du pavillon égyptien." },
+  f1: { meta: "Paris, France", name: "SIAL Paris 2018", body: "L'année de notre 40e anniversaire, célébrée au SIAL avec des dégustations, le stand anniversaire et des rendez-vous avec des acheteurs européens et nord-africains." },
+  f2: { meta: "Dubaï, Émirats arabes unis", name: "Gulfood 2019", body: "Rendez-vous avec les importateurs et distributeurs du Golfe, dont la visite d'une délégation officielle au pavillon égyptien." },
+  archiveLabel: "Salons précédents",
+  archive: [
+    { key: "anuga2015", year: "2015", name: "ANUGA", place: "Cologne, Allemagne" },
+    { key: "sial2014", year: "2014", name: "SIAL Paris", place: "Paris, France" },
+    { key: "anuga2013", year: "2013", name: "ANUGA", place: "Cologne, Allemagne" },
+    { key: "sial2012", year: "2012", name: "SIAL Paris", place: "Paris, France" },
+    { key: "sialParis", year: "2010", name: "SIAL Paris", place: "Paris, France" },
+    { key: "anuga2009", year: "2009", name: "ANUGA", place: "Cologne, Allemagne" },
+    { key: "sial2008", year: "2008", name: "SIAL Paris", place: "Paris, France" },
+    { key: "cibus2006", year: "2006", name: "CIBUS", place: "Parme, Italie" }
+  ],
+  momentsLabel: "Sur les salons",
+  ctaEyebrow: "Nous rencontrer",
+  ctaTitle: "Prenez rendez-vous sur notre prochain stand",
+  ctaSub: "Indiquez-nous le salon auquel vous participez et la gamme que vous achetez : nous préparerons échantillons et spécifications pour le rendez-vous.",
+  ctaButton: "Contactez-nous",
+  footerAddress: "Givrex\nAlexandrie, Égypte",
+  footerShowsLabel: "Nous exposons à",
+  shows: ["SIAL, Paris", "Anuga, Cologne", "Gulfood, Dubaï"],
+  footerNavLabel: "Site",
+  footerContactLabel: "Demandes export",
+  footerLegal: "© 2026 Givrex. Tous droits réservés."
+};
+
+const AR = {
+  cta: "اطلب عرض سعر",
+  nav: [
+    { label: "منتجاتنا", href: "Givrex%20Products.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "الشهادات", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "وصفات", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "الأخبار والمعارض", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
+    { label: "عن الشركة", href: "Givrex%20About.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "أسواق التصدير", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "تواصل معنا", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
+  ],
+  eyebrow: "الأخبار والمعارض",
+  title: "جيفركس حاضرة في كبرى المعارض الدولية",
+  sub: "يسعدنا دائمًا استقبالكم في جناحنا خلال المعارض الدولية القادمة.",
+  sub2: "نشارك بانتظام في المعارض حول العالم، في أمريكا وأوروبا والشرق الأوسط والشرق الأقصى. وهذه بعض المناسبات التي لا تُنسى:",
+  latestLabel: "الأحدث",
+  f0: { meta: "كولونيا، ألمانيا", name: "أنوغا ٢٠١٩", body: "أكبر أجنحتنا في أنوغا حتى الآن، وعرضنا فيه مجموعة الخضروات والفواكه والأطباق المجمّدة كاملة ضمن الجناح المصري." },
+  f1: { meta: "باريس، فرنسا", name: "سيال باريس ٢٠١٨", body: "عام الذكرى الأربعين لتأسيسنا، احتفلنا به في سيال بجلسات تذوّق وجناح الذكرى ولقاءات مع مستوردين من أوروبا وشمال إفريقيا." },
+  f2: { meta: "دبي، الإمارات العربية المتحدة", name: "جلفود ٢٠١٩", body: "لقاءات مع المستوردين والموزعين في الخليج، شملت زيارة وفد رسمي للجناح المصري." },
+  archiveLabel: "معارض سابقة",
+  archive: [
+    { key: "anuga2015", year: "٢٠١٥", name: "أنوغا", place: "كولونيا، ألمانيا" },
+    { key: "sial2014", year: "٢٠١٤", name: "سيال باريس", place: "باريس، فرنسا" },
+    { key: "anuga2013", year: "٢٠١٣", name: "أنوغا", place: "كولونيا، ألمانيا" },
+    { key: "sial2012", year: "٢٠١٢", name: "سيال باريس", place: "باريس، فرنسا" },
+    { key: "sialParis", year: "٢٠١٠", name: "سيال باريس", place: "باريس، فرنسا" },
+    { key: "anuga2009", year: "٢٠٠٩", name: "أنوغا", place: "كولونيا، ألمانيا" },
+    { key: "sial2008", year: "٢٠٠٨", name: "سيال باريس", place: "باريس، فرنسا" },
+    { key: "cibus2006", year: "٢٠٠٦", name: "تشيبوس", place: "بارما، إيطاليا" }
+  ],
+  momentsLabel: "من المعارض",
+  ctaEyebrow: "قابلنا",
+  ctaTitle: "احجز موعدًا في جناحنا القادم",
+  ctaSub: "أخبرنا بالمعرض الذي ستحضره والمجموعة التي تشتريها، وسنجهّز العينات والمواصفات للقاء.",
+  ctaButton: "تواصل معنا",
+  footerAddress: "جيفركس\nالإسكندرية، مصر",
+  footerShowsLabel: "نشارك في",
+  shows: ["سيال، باريس", "أنوغا، كولونيا", "جلفود، دبي"],
+  footerNavLabel: "الموقع",
+  footerContactLabel: "طلبات التصدير",
+  footerLegal: "© ٢٠٢٦ جيفركس. جميع الحقوق محفوظة."
+};
+
+const DICT = { en: EN, ar: AR, fr: FR };
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const q = new URLSearchParams(location.search).get("lang");
+    this.syncWidth = () => {
+      const wide = window.innerWidth >= 1040;
+      if (wide !== this.state.wide) this.setState({ wide, menuOpen: false });
+    };
+    this.state = {
+      wide: true,
+      menuOpen: false,
+      langOpen: false,
+      lang: DICT[q] ? q : (DICT[props.lang] ? props.lang : "en")
+    };
+  }
+  componentDidMount() {
+    this.syncWidth();
+    window.addEventListener("resize", this.syncWidth);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.syncWidth);
+  }
+  renderVals() {
+    const lang = this.state.lang;
+    const t = DICT[lang] || EN;
+    const pill = (code) => ({
+      on: () => this.setState({ lang: code, langOpen: false }),
+      bg: lang === code ? "#E7EFE4" : "transparent",
+      weight: lang === code ? 700 : 500,
+      drawerBg: lang === code ? "#E0B14E" : "transparent",
+      drawerColor: lang === code ? "#16291F" : "rgba(251,247,238,0.88)",
+      drawerBorder: lang === code ? "#E0B14E" : "rgba(251,247,238,0.3)"
+    });
+    return {
+      lang,
+      dir: lang === "ar" ? "rtl" : "ltr",
+      t,
+      archive: t.archive.map(a => Object.assign({}, a, { img: IMG[a.key] })),
+      wide: this.state.wide,
+      narrow: !this.state.wide,
+      menuOpen: !this.state.wide && this.state.menuOpen,
+      langOpen: this.state.langOpen,
+      langLabel: { en: "English", ar: "العربية", fr: "Français" }[lang],
+      isEn: lang === "en", isFr: lang === "fr", isAr: lang === "ar",
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      toggleLangMenu: () => this.setState(s => ({ langOpen: !s.langOpen })),
+      langEn: pill("en"),
+      langFr: pill("fr"),
+      langAr: pill("ar")
+    };
+  }
+}
+</script>
+</body>
+</html>

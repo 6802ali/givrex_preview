@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Cairo:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FBF7EE; }
+  * { box-sizing: border-box; }
+  a { color: #1E3A2B; text-decoration: none; }
+  a:hover { color: #8A6516; }
+  input, select, textarea, button { font: inherit; color: inherit; }
+</style>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="background: #FBF7EE; color: #1E3A2B; font-family: 'Work Sans', 'Almarai', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;">
+
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(22,41,31,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(251,247,238,0.16);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; gap: 20px;">
+      <a href="Givrex%20Landing.dc.html" style="display: flex; align-items: center; flex: none;">
+        <img src="assets/givrex-logo.png" alt="Givrex, since 1978" style="height: 62px; width: auto; max-height: 12vw; display: block;" />
+      </a>
+      <div style="margin-inline-start: auto; display: flex; align-items: center; gap: 20px; min-width: 0;">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <nav style="display: flex; flex-wrap: nowrap; align-items: center; column-gap: clamp(10px, 1.3vw, 22px); min-width: 0;">
+            <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
+              <a href="{{ item.href }}" style="font-size: 14px; font-weight: 500; color: {{ item.color }}; border-bottom: {{ item.rule }}; padding-bottom: 3px; white-space: nowrap;" style-hover="color: #E0B14E;">{{ item.label }}</a>
+            </sc-for>
+          </nav>
+        </sc-if>
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; gap: 10px; flex: none;">
+            <div style="position: relative; flex: none;">
+          <button onClick="{{ toggleLangMenu }}" aria-haspopup="listbox" aria-expanded="{{ langOpen }}" style="display: flex; align-items: center; gap: 8px; background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; padding: 7px 13px; cursor: pointer; color: #FBF7EE; font-size: 13px; font-weight: 600; white-space: nowrap;" style-hover="border-color: #E0B14E; color: #E0B14E;">
+            <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span></sc-if>
+            <sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span></sc-if>
+            <sc-if value="{{ isAr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span></sc-if>
+            <span>{{ langLabel }}</span>
+            <span style="font-size: 9px; opacity: 0.75;">▼</span>
+          </button>
+          <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+            <div role="listbox" style="position: absolute; top: calc(100% + 10px); inset-inline-end: 0; background: #FBF7EE; border: 1px solid rgba(30,58,43,0.14); border-radius: 14px; box-shadow: 0 18px 44px rgba(11,22,16,0.28); padding: 6px; min-width: 196px; z-index: 40; display: flex; flex-direction: column; gap: 2px;">
+            <button onClick="{{ langEn.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langEn.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langEn.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span><span>English</span></button>
+            <button onClick="{{ langFr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langFr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langFr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span><span>Français</span></button>
+            <button onClick="{{ langAr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langAr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langAr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span><span>العربية</span></button>
+            </div>
+          </sc-if>
+        </div>
+            <a href="Givrex%20Landing.dc.html#quote" style="display: inline-flex; align-items: center; gap: 8px; background: #E0B14E; color: #16291F; padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 16px;">→</span></a>
+          </div>
+        </sc-if>
+        <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 10px; flex: none;">
+            <div style="position: relative; flex: none;">
+          <button onClick="{{ toggleLangMenu }}" aria-haspopup="listbox" aria-expanded="{{ langOpen }}" style="display: flex; align-items: center; gap: 8px; background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; padding: 7px 13px; cursor: pointer; color: #FBF7EE; font-size: 13px; font-weight: 600; white-space: nowrap;" style-hover="border-color: #E0B14E; color: #E0B14E;">
+            <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span></sc-if>
+            <sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span></sc-if>
+            <sc-if value="{{ isAr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span></sc-if>
+            <span>{{ langLabel }}</span>
+            <span style="font-size: 9px; opacity: 0.75;">▼</span>
+          </button>
+          <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+            <div role="listbox" style="position: absolute; top: calc(100% + 10px); inset-inline-end: 0; background: #FBF7EE; border: 1px solid rgba(30,58,43,0.14); border-radius: 14px; box-shadow: 0 18px 44px rgba(11,22,16,0.28); padding: 6px; min-width: 196px; z-index: 40; display: flex; flex-direction: column; gap: 2px;">
+            <button onClick="{{ langEn.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langEn.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langEn.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span><span>English</span></button>
+            <button onClick="{{ langFr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langFr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langFr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span><span>Français</span></button>
+            <button onClick="{{ langAr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langAr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langAr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span><span>العربية</span></button>
+            </div>
+          </sc-if>
+        </div>
+            <button onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menuOpen }}" style="width: 44px; height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; cursor: pointer; flex: none;" style-hover="border-color: #E0B14E;">
+              <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+              <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+              <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+            </button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top: 1px solid rgba(251,247,238,0.16); padding: 14px 20px 20px; display: flex; flex-direction: column; gap: 4px;">
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
+          <a href="{{ item.href }}" onClick="{{ closeMenu }}" style="font-size: 16px; font-weight: 500; color: rgba(251,247,238,0.88); padding: 12px 4px; border-bottom: 1px solid rgba(251,247,238,0.1);" style-hover="color: #E0B14E;">{{ item.label }}</a>
+        </sc-for>
+        <a href="Givrex%20Landing.dc.html#quote" onClick="{{ closeMenu }}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: #E0B14E; color: #16291F; padding: 12px 26px; border-radius: 999px; font-size: 15px; font-weight: 600; margin-top: 14px;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 16px;">→</span></a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 22px clamp(18px, 4vw, 28px) 0;">
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13.5px; color: rgba(30,58,43,0.6);">
+      <a href="Givrex%20Products.dc.html" style="font-weight: 500; color: rgba(30,58,43,0.7);" style-hover="color: #8A6516;">{{ t.allProducts }}</a>
+      <span>/</span>
+      <a href="{{ catHref }}" style="font-weight: 500; color: rgba(30,58,43,0.7);" style-hover="color: #8A6516;">{{ catLabel }}</a>
+      <span>/</span>
+      <span style="font-weight: 600; color: #1E3A2B;">{{ name }}</span>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 26px clamp(18px, 4vw, 28px) 40px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 44px; align-items: start;">
+      <div style="background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; box-shadow: 0 14px 40px rgba(22,41,31,0.07); overflow: hidden;">
+        <div style="aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; padding: 34px; background: linear-gradient(160deg, #F2F5EA 0%, #E4EBD4 100%);">
+          <img src="{{ photo }}" alt="{{ name }}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; margin: auto; object-fit: contain; filter: drop-shadow(0 16px 26px rgba(22,41,31,0.24));" />
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ catLabel }}</span>
+        </div>
+        <h1 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(30px, 3.8vw, 46px); line-height: 1.1; letter-spacing: -0.015em; text-wrap: pretty;">{{ name }}</h1>
+        <p style="margin: 0; font-size: 17px; line-height: 1.7; color: rgba(30,58,43,0.78); max-width: 520px;">{{ note }}</p>
+
+        <div style="background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; padding: 8px 26px; box-shadow: 0 14px 40px rgba(22,41,31,0.07);">
+          <sc-for list="{{ specs }}" as="row" hint-placeholder-count="5">
+            <div style="display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 16px 0; border-bottom: 1px solid rgba(30,58,43,0.09);">
+              <span style="flex: none; min-width: 150px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A6516;">{{ row.label }}</span>
+              <span style="font-size: 15.5px; font-weight: 500; color: #1E3A2B;">{{ row.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px;">
+          <a href="Givrex%20Landing.dc.html#quote" style="display: inline-flex; align-items: center; gap: 10px; background: #1E3A2B; color: #FBF7EE; padding: 14px 30px; border-radius: 999px; font-size: 15px; font-weight: 600;" style-hover="background: #B08A2E; color: #16291F;">{{ t.enquire }}<span style="font-size: 17px;">→</span></a>
+          <a href="Givrex%20Products.dc.html" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(30,58,43,0.28); color: #1E3A2B; padding: 14px 30px; border-radius: 999px; font-size: 15px; font-weight: 600;" style-hover="border-color: #1E3A2B; background: rgba(30,58,43,0.05); color: #1E3A2B;">{{ t.backToCatalogue }}</a>
+        </div>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.6; color: rgba(30,58,43,0.6); max-width: 500px;">{{ t.specNote }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #F3EDE0; border-block: 1px solid rgba(30,58,43,0.1);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 56px clamp(18px, 4vw, 28px) 64px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px;">
+        <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.alsoIn }} {{ catLabel }}</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="8">
+          <a href="{{ r.href }}" style="background: #FFFFFF; border: 1px solid rgba(30,58,43,0.12); border-radius: 999px; padding: 10px 20px; font-size: 14.5px; font-weight: 500; color: #1E3A2B;" style-hover="border-color: #1E3A2B; color: #8A6516;">{{ r.name }}</a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #1E3A2B; color: #FBF7EE;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 62px clamp(18px, 4vw, 28px) 66px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 30px;">
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 620px;">
+        <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(26px, 3vw, 38px); line-height: 1.14; letter-spacing: -0.015em; color: #FBF7EE;">{{ t.ctaTitle }}</h2>
+        <p style="margin: 0; font-size: 16.5px; line-height: 1.7; color: rgba(251,247,238,0.82);">{{ t.ctaSub }}</p>
+      </div>
+      <a href="Givrex%20Landing.dc.html#quote" style="display: inline-flex; align-items: center; gap: 10px; background: #E0B14E; color: #16291F; padding: 15px 32px; border-radius: 999px; font-size: 15.5px; font-weight: 600;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 17px;">→</span></a>
+    </div>
+  </section>
+
+  <footer style="background: #16291F; color: rgba(251,247,238,0.75);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 56px clamp(18px, 4vw, 28px) 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+        <img src="assets/givrex-logo.png" alt="Givrex, since 1978" style="height: 66px; width: auto; display: block;" />
+        <span style="font-size: 14.5px; line-height: 1.6; white-space: pre-line;">{{ t.footerAddress }}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerShowsLabel }}</span>
+        </div>
+        <sc-for list="{{ t.shows }}" as="show" hint-placeholder-count="2">
+          <span style="font-size: 14.5px; line-height: 1.55;">{{ show }}</span>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerNavLabel }}</span>
+        </div>
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
+          <a href="{{ item.href }}" style="font-size: 14.5px; font-weight: 500; color: rgba(251,247,238,0.78);" style-hover="color: #E0B14E;">{{ item.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerContactLabel }}</span>
+        </div>
+        <span style="font-size: 14.5px;">info@givrex.com</span>
+        <span style="font-size: 14.5px;"><span style="direction: ltr; unicode-bidi: embed; display: inline-block;">+(203) 424-4000</span></span>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(251,247,238,0.14);">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 18px clamp(18px, 4vw, 28px); font-family: 'Work Sans', 'Almarai', sans-serif; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251,247,238,0.5);">
+        <span>{{ t.footerLegal }}</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const L = "Givrex%20Landing.dc.html";
+const P = "Givrex%20Products.dc.html";
+
+const EN = {
+  langToggle: "العربية",
+  cta: "Contact us",
+  enquire: "Enquire about this product",
+  backToCatalogue: "Back to catalogue",
+  allProducts: "Products",
+  alsoIn: "Also in",
+  specNote: "Givrex offers private label packaging and provides packages in various sizes to meet client specific requirements.",
+  ctaTitle: "Need a specification sheet?",
+  ctaSub: "Givrex is pleased to provide whichever specifications with regard to its products, and would be delighted at all times to comply with your requests.",
+  nav: [
+    { label: "Products", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
+    { label: "Certifications", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Recipes", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "News & Fairs", href: "Givrex%20News.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "About us", href: "Givrex%20About.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Export reach", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Contact", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
+  ],
+  labels: { form: "Process", origin: "Origin", pack: "Pack formats", cut: "Cut and grade", shipping: "Shipping" },
+  values: {
+    origin: "Nile Delta, Egypt",
+    pack: "Private label packaging, in various sizes to meet client specific requirements",
+    shipping: "Exported to Europe, North and South America, Australia and the Arab countries"
+  },
+  footerAddress: "Givrex\nAlexandria, Egypt",
+  footerShowsLabel: "We exhibit at",
+  shows: ["SIAL, Paris", "Anuga, Cologne"],
+  footerNavLabel: "Site",
+  footerContactLabel: "Contact us",
+  footerLegal: "© 2026 Givrex. All rights reserved."
+};
+
+const AR = {
+  langToggle: "English",
+  cta: "تواصل معنا",
+  enquire: "استعلم عن هذا المنتج",
+  backToCatalogue: "العودة إلى الكتالوج",
+  allProducts: "المنتجات",
+  alsoIn: "أيضًا في",
+  specNote: "أشكال التعبئة والتقطيع والملصقات تُنتج حسب مواصفات العميل. اطلب منا كراسة المواصفات الكاملة.",
+  ctaTitle: "تحتاج كراسة مواصفات أو سعرًا؟",
+  ctaSub: "أخبرنا بالكمية والوجهة. نرد خلال يومي عمل.",
+  nav: [
+    { label: "منتجاتنا", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
+    { label: "الشهادات", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "وصفات", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "الأخبار والمعارض", href: "Givrex%20News.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "عن الشركة", href: "Givrex%20About.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "أسواق التصدير", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "تواصل معنا", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
+  ],
+  labels: { form: "طريقة الحفظ", origin: "المصدر", pack: "أشكال التعبئة", cut: "التقطيع والتدريج", shipping: "الشحن" },
+  values: {
+    origin: "دلتا النيل، مصر",
+    pack: "عبوة ٤٠٠ جرام للتجزئة، وعبوات التغذية والصناعة حسب المواصفة",
+    shipping: "فوب الإسكندرية، حاوية مبرّدة"
+  },
+  footerAddress: "جيفركس\nالإسكندرية، مصر",
+  footerShowsLabel: "نشارك في",
+  shows: ["سيال، باريس", "أنوغا، كولونيا"],
+  footerNavLabel: "الموقع",
+  footerContactLabel: "طلبات التصدير",
+  footerLegal: "© ٢٠٢٦ جيفركس. جميع الحقوق محفوظة."
+};
+
+const FR = {
+  cta: "Contactez-nous",
+  enquire: "Demander ce produit",
+  backToCatalogue: "Retour au catalogue",
+  allProducts: "Produits",
+  alsoIn: "Également dans",
+  specNote: "Les formats de conditionnement, la découpe et l'étiquetage sont réalisés selon le cahier des charges de l'acheteur. Demandez-nous la fiche technique complète.",
+  ctaTitle: "Besoin d'une fiche technique ou d'un prix ?",
+  ctaSub: "Indiquez-nous le volume et la destination. Nous répondons sous deux jours ouvrés.",
+  nav: [
+    { label: "Produits", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
+    { label: "Certifications", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Recettes", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Actualités", href: "Givrex%20News.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "À propos", href: "Givrex%20About.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Exportation", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Contact", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
+  ],
+  labels: { form: "Procédé", origin: "Origine", pack: "Formats de conditionnement", cut: "Découpe et calibrage", shipping: "Expédition" },
+  values: {
+    origin: "Delta du Nil, Égypte",
+    pack: "Sachet 400 g pour la distribution ; formats vrac restauration et industrie sur cahier des charges",
+    shipping: "FOB Alexandrie, conteneur frigorifique"
+  },
+  footerAddress: "Givrex\nAlexandrie, Égypte",
+  footerShowsLabel: "Nous exposons à",
+  shows: ["SIAL, Paris", "Anuga, Cologne"],
+  footerNavLabel: "Site",
+  footerContactLabel: "Demandes export",
+  footerLegal: "© 2026 Givrex. Tous droits réservés."
+};
+
+const CAT_ANCHOR = { vegetables: "#vegetables", fruits: "#fruits", soups: "#soups", meals: "#meals" };
+
+const DICT = { en: EN, ar: AR, fr: FR };
+const LANGS = ["en", "ar", "fr"];
+const LANG_LABELS = { en: "EN", ar: "ع", fr: "FR" };
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const q = new URLSearchParams(location.search);
+    this.syncWidth = () => {
+      const wide = window.innerWidth >= 940;
+      if (wide !== this.state.wide) this.setState({ wide, menuOpen: false });
+    };
+    this.state = {
+      wide: true,
+      menuOpen: false,
+      langOpen: false,
+      lang: (LANGS.indexOf(q.get("lang") || props.lang) >= 0 ? (q.get("lang") || props.lang) : "en"),
+      slug: q.get("p") || props.slug || "okra-special",
+      data: null
+    };
+  }
+  componentDidMount() {
+    this.syncWidth();
+    window.addEventListener("resize", this.syncWidth);
+    import("./product-data.js").then(m => this.setState({ data: m }));
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.syncWidth);
+  }
+  renderVals() {
+    const lang = this.state.lang;
+    const t = (DICT[lang] || EN);
+    const ar = lang === "ar";
+    const sfx = lang === "ar" ? "Ar" : (lang === "fr" ? "Fr" : "");
+    const pick = (o, k) => o ? (o[k + sfx] || o[k]) : "";
+    const qs = lang === "en" ? "" : "&lang=" + lang;
+    const m = this.state.data;
+    const p = m ? m.bySlug(this.state.slug) : null;
+    const related = (p && m ? m.inCategory(p.catId, p.slug) : []).map(r => ({
+      name: pick(r, "name"),
+      href: "Givrex%20Product.dc.html?p=" + r.slug + qs
+    }));
+    const specs = p ? [
+      { label: t.labels.form, value: pick(p, "tag") },
+      { label: t.labels.origin, value: t.values.origin },
+      { label: t.labels.cut, value: pick(p, "note") },
+      { label: t.labels.pack, value: t.values.pack },
+      { label: t.labels.shipping, value: t.values.shipping }
+    ] : [];
+    return {
+      lang,
+      dir: ar ? "rtl" : "ltr",
+      t,
+      name: pick(p, "name"),
+      note: pick(p, "note"),
+      catLabel: pick(p, "cat"),
+      catHref: p ? P + CAT_ANCHOR[p.catId] : P,
+      photo: p && p.img ? "assets/" + p.img + ".png" : "assets/givrex-logo.png",
+      specs,
+      related,
+      wide: this.state.wide,
+      narrow: !this.state.wide,
+      menuOpen: !this.state.wide && this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      langOpen: this.state.langOpen,
+      langLabel: { en: "English", ar: "العربية", fr: "Français" }[lang],
+      isEn: lang === "en", isFr: lang === "fr", isAr: lang === "ar",
+      toggleLangMenu: () => this.setState(s => ({ langOpen: !s.langOpen })),
+      langEn: { on: () => this.setState({ lang: "en", langOpen: false }), bg: lang === "en" ? "#E7EFE4" : "transparent", weight: lang === "en" ? 700 : 500 },
+      langFr: { on: () => this.setState({ lang: "fr", langOpen: false }), bg: lang === "fr" ? "#E7EFE4" : "transparent", weight: lang === "fr" ? 700 : 500 },
+      langAr: { on: () => this.setState({ lang: "ar", langOpen: false }), bg: lang === "ar" ? "#E7EFE4" : "transparent", weight: lang === "ar" ? 700 : 500 }
+    };
+  }
+}
+</script>
+</body>
+</html>

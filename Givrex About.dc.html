@@ -22,20 +22,74 @@
 <div dir="{{ dir }}" lang="{{ lang }}" style="background: #FBF7EE; color: #1E3A2B; font-family: 'Work Sans', 'Almarai', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;">
 
   <header style="position: sticky; top: 0; z-index: 20; background: rgba(22,41,31,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(251,247,238,0.16);">
-    <div style="max-width: 1240px; margin: 0 auto; padding: 12px 28px; display: flex; align-items: center; gap: 28px;">
-      <a href="Givrex%20Landing.dc.html" style="display: flex; align-items: center;">
-        <img src="assets/givrex-logo.png" alt="Givrex, since 1978" style="height: 54px; width: auto; display: block;" />
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; gap: 20px;">
+      <a href="Givrex%20Landing.dc.html" style="display: flex; align-items: center; flex: none;">
+        <img src="assets/givrex-logo.png" alt="Givrex, since 1978" style="height: 62px; width: auto; max-height: 12vw; display: block;" />
       </a>
-      <nav style="display: flex; align-items: center; gap: 24px; margin-inline-start: auto; flex-wrap: wrap;">
-        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="4">
-          <a href="{{ item.href }}" style="font-size: 14.5px; font-weight: 500; color: {{ item.color }}; border-bottom: {{ item.rule }}; padding-bottom: 3px;" style-hover="color: #E0B14E;">{{ item.label }}</a>
-        </sc-for>
-      </nav>
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <button onClick="{{ toggleLang }}" style="background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; padding: 9px 16px; font-size: 13px; font-weight: 600; cursor: pointer; letter-spacing: 0.02em; color: #FBF7EE;" style-hover="border-color: #E0B14E; color: #E0B14E;">{{ t.langToggle }}</button>
-        <a href="Givrex%20Landing.dc.html#quote" style="display: inline-flex; align-items: center; gap: 8px; background: #E0B14E; color: #16291F; padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 16px;">→</span></a>
+      <div style="margin-inline-start: auto; display: flex; align-items: center; gap: 20px; min-width: 0;">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <nav style="display: flex; flex-wrap: nowrap; align-items: center; column-gap: clamp(10px, 1.3vw, 22px); min-width: 0;">
+            <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
+              <a href="{{ item.href }}" style="font-size: 14px; font-weight: 500; color: {{ item.color }}; border-bottom: {{ item.rule }}; padding-bottom: 3px; white-space: nowrap;" style-hover="color: #E0B14E;">{{ item.label }}</a>
+            </sc-for>
+          </nav>
+        </sc-if>
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; gap: 10px; flex: none;">
+            <div style="position: relative; flex: none;">
+          <button onClick="{{ toggleLangMenu }}" aria-haspopup="listbox" aria-expanded="{{ langOpen }}" style="display: flex; align-items: center; gap: 8px; background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; padding: 7px 13px; cursor: pointer; color: #FBF7EE; font-size: 13px; font-weight: 600; white-space: nowrap;" style-hover="border-color: #E0B14E; color: #E0B14E;">
+            <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span></sc-if>
+            <sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span></sc-if>
+            <sc-if value="{{ isAr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span></sc-if>
+            <span>{{ langLabel }}</span>
+            <span style="font-size: 9px; opacity: 0.75;">▼</span>
+          </button>
+          <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+            <div role="listbox" style="position: absolute; top: calc(100% + 10px); inset-inline-end: 0; background: #FBF7EE; border: 1px solid rgba(30,58,43,0.14); border-radius: 14px; box-shadow: 0 18px 44px rgba(11,22,16,0.28); padding: 6px; min-width: 196px; z-index: 40; display: flex; flex-direction: column; gap: 2px;">
+            <button onClick="{{ langEn.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langEn.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langEn.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span><span>English</span></button>
+            <button onClick="{{ langFr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langFr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langFr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span><span>Français</span></button>
+            <button onClick="{{ langAr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langAr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langAr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span><span>العربية</span></button>
+            </div>
+          </sc-if>
+        </div>
+            <a href="Givrex%20Landing.dc.html#quote" style="display: inline-flex; align-items: center; gap: 8px; background: #E0B14E; color: #16291F; padding: 10px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 16px;">→</span></a>
+          </div>
+        </sc-if>
+        <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 10px; flex: none;">
+            <div style="position: relative; flex: none;">
+          <button onClick="{{ toggleLangMenu }}" aria-haspopup="listbox" aria-expanded="{{ langOpen }}" style="display: flex; align-items: center; gap: 8px; background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; padding: 7px 13px; cursor: pointer; color: #FBF7EE; font-size: 13px; font-weight: 600; white-space: nowrap;" style-hover="border-color: #E0B14E; color: #E0B14E;">
+            <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span></sc-if>
+            <sc-if value="{{ isFr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span></sc-if>
+            <sc-if value="{{ isAr }}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span></sc-if>
+            <span>{{ langLabel }}</span>
+            <span style="font-size: 9px; opacity: 0.75;">▼</span>
+          </button>
+          <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+            <div role="listbox" style="position: absolute; top: calc(100% + 10px); inset-inline-end: 0; background: #FBF7EE; border: 1px solid rgba(30,58,43,0.14); border-radius: 14px; box-shadow: 0 18px 44px rgba(11,22,16,0.28); padding: 6px; min-width: 196px; z-index: 40; display: flex; flex-direction: column; gap: 2px;">
+            <button onClick="{{ langEn.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langEn.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langEn.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.25); position: relative; display: block; flex: none; overflow: hidden;"><span style="position: absolute; left: 0; right: 0; top: 5px; height: 4px; background: #CE1124; display: block;"></span><span style="position: absolute; top: 0; bottom: 0; left: 8px; width: 4px; background: #CE1124; display: block;"></span></span><span>English</span></button>
+            <button onClick="{{ langFr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langFr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langFr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #0055A4;"></span><span style="flex: 1; background: #FFFFFF;"></span><span style="flex: 1; background: #EF4135;"></span></span><span>Français</span></button>
+            <button onClick="{{ langAr.on }}" style="display: flex; align-items: center; gap: 10px; background: {{ langAr.bg }}; color: #1E3A2B; border: none; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; font-weight: {{ langAr.weight }}; cursor: pointer; text-align: start; width: 100%;" style-hover="background: #F0EADC;"><span style="width: 20px; height: 14px; border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; flex: none; border: 1px solid rgba(30,58,43,0.25);"><span style="flex: 1; background: #CE1126;"></span><span style="flex: 1; background: #FFFFFF; position: relative;"><span style="position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; background: #C09300; border-radius: 1px; display: block;"></span></span><span style="flex: 1; background: #000000;"></span></span><span>العربية</span></button>
+            </div>
+          </sc-if>
+        </div>
+            <button onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menuOpen }}" style="width: 44px; height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: none; border: 1px solid rgba(251,247,238,0.32); border-radius: 999px; cursor: pointer; flex: none;" style-hover="border-color: #E0B14E;">
+              <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+              <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+              <span style="width: 17px; height: 2px; background: #FBF7EE; display: block; border-radius: 2px;"></span>
+            </button>
+          </div>
+        </sc-if>
       </div>
     </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top: 1px solid rgba(251,247,238,0.16); padding: 14px 20px 20px; display: flex; flex-direction: column; gap: 4px;">
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
+          <a href="{{ item.href }}" onClick="{{ closeMenu }}" style="font-size: 16px; font-weight: 500; color: rgba(251,247,238,0.88); padding: 12px 4px; border-bottom: 1px solid rgba(251,247,238,0.1);" style-hover="color: #E0B14E;">{{ item.label }}</a>
+        </sc-for>
+        <a href="Givrex%20Landing.dc.html#quote" onClick="{{ closeMenu }}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: #E0B14E; color: #16291F; padding: 12px 26px; border-radius: 999px; font-size: 15px; font-weight: 600; margin-top: 14px;" style-hover="background: #FBF7EE; color: #16291F;">{{ t.cta }}<span style="font-size: 16px;">→</span></a>
+      </div>
+    </sc-if>
   </header>
 
   <section id="top" style="position: relative; background: #24452F; overflow: hidden;">
@@ -43,7 +97,6 @@
     <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(102deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 15px);"></div>
     <div style="position: relative; max-width: 1240px; margin: 0 auto; padding: 58px 28px 62px; display: flex; flex-direction: column; gap: 18px;">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="width: 8px; height: 8px; background: #E0B14E; transform: rotate(45deg); display: block;"></span>
         <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #E0B14E;">{{ t.pageEyebrow }}</span>
       </div>
       <h1 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(32px, 4.2vw, 52px); line-height: 1.1; letter-spacing: -0.015em; color: #FBF7EE; max-width: 840px; text-wrap: pretty;">{{ t.pageTitle }}</h1>
@@ -55,7 +108,6 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 52px; align-items: center;">
       <div style="display: flex; flex-direction: column; gap: 18px;">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="width: 8px; height: 8px; background: #B08A2E; transform: rotate(45deg); display: block;"></span>
           <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.storyEyebrow }}</span>
         </div>
         <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.14; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.storyTitle }}</h2>
@@ -73,13 +125,12 @@
     <div style="max-width: 1240px; margin: 0 auto; padding: 88px 28px 92px;">
       <div style="display: flex; flex-direction: column; gap: 14px; max-width: 640px; margin-bottom: 40px;">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="width: 8px; height: 8px; background: #B08A2E; transform: rotate(45deg); display: block;"></span>
           <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.howEyebrow }}</span>
         </div>
         <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.14; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.howTitle }}</h2>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
-        <sc-for list="{{ t.how }}" as="row" hint-placeholder-count="4">
+        <sc-for list="{{ t.how }}" as="row" hint-placeholder-count="5">
           <div style="background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; padding: 26px 26px 28px; box-shadow: 0 14px 40px rgba(22,41,31,0.07); display: flex; flex-direction: column; gap: 12px;">
             <span style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: #E7EFE4; color: #2C5133; display: flex; align-items: center; justify-content: center; font-size: 13.5px; font-weight: 700; line-height: 1;">{{ row.num }}</span>
             <h3 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-size: 21px; font-weight: 600; line-height: 1.25;">{{ row.title }}</h3>
@@ -97,12 +148,11 @@
       </div>
       <div style="display: flex; flex-direction: column; gap: 18px;">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="width: 8px; height: 8px; background: #B08A2E; transform: rotate(45deg); display: block;"></span>
           <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.credEyebrow }}</span>
         </div>
         <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.14; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.credTitle }}</h2>
         <div style="background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; padding: 30px 28px; box-shadow: 0 14px 40px rgba(22,41,31,0.07); display: flex; flex-direction: column; gap: 16px;">
-          <sc-for list="{{ t.credentials }}" as="item" hint-placeholder-count="6">
+          <sc-for list="{{ t.credentials }}" as="item" hint-placeholder-count="7">
             <div style="display: flex; align-items: flex-start; gap: 14px;">
               <span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: #E7EFE4; color: #2C5133; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; line-height: 1;">✓</span>
               <span style="font-size: 15.5px; font-weight: 600; color: #1E3A2B; line-height: 1.45;">{{ item }}</span>
@@ -117,7 +167,6 @@
     <div style="max-width: 1240px; margin: 0 auto; padding: 88px 28px 92px;">
     <div style="display: flex; flex-direction: column; gap: 14px; max-width: 640px; margin-bottom: 36px;">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="width: 8px; height: 8px; background: #B08A2E; transform: rotate(45deg); display: block;"></span>
         <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6516;">{{ t.showsEyebrow }}</span>
       </div>
       <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.14; letter-spacing: -0.015em; text-wrap: pretty;">{{ t.showsTitle }}</h2>
@@ -139,7 +188,6 @@
     <div style="max-width: 1240px; margin: 0 auto; padding: 66px 28px 70px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px;">
       <div style="display: flex; flex-direction: column; gap: 14px; max-width: 620px;">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="width: 8px; height: 8px; background: #E0B14E; transform: rotate(45deg); display: block;"></span>
           <span style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #E0B14E;">{{ t.ctaEyebrow }}</span>
         </div>
         <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.14; letter-spacing: -0.015em; color: #FBF7EE;">{{ t.ctaTitle }}</h2>
@@ -160,7 +208,6 @@
       </div>
       <div style="display: flex; flex-direction: column; gap: 14px;">
         <div style="display: flex; align-items: center; gap: 9px;">
-          <span style="width: 7px; height: 7px; background: #E0B14E; transform: rotate(45deg); display: block; flex: none;"></span>
           <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerShowsLabel }}</span>
         </div>
         <sc-for list="{{ t.shows }}" as="show" hint-placeholder-count="2">
@@ -169,20 +216,18 @@
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <div style="display: flex; align-items: center; gap: 9px;">
-          <span style="width: 7px; height: 7px; background: #E0B14E; transform: rotate(45deg); display: block; flex: none;"></span>
           <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerNavLabel }}</span>
         </div>
-        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="4">
+        <sc-for list="{{ t.nav }}" as="item" hint-placeholder-count="7">
           <a href="{{ item.href }}" style="font-size: 14.5px; font-weight: 500; color: rgba(251,247,238,0.78);" style-hover="color: #E0B14E;">{{ item.label }}</a>
         </sc-for>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <div style="display: flex; align-items: center; gap: 9px;">
-          <span style="width: 7px; height: 7px; background: #E0B14E; transform: rotate(45deg); display: block; flex: none;"></span>
           <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #E0B14E;">{{ t.footerContactLabel }}</span>
         </div>
-        <span style="font-size: 14.5px;">export@givrex.com</span>
-        <span style="font-size: 14.5px;"><span style="direction: ltr; unicode-bidi: embed; display: inline-block;">+20 3 420 0000</span></span>
+        <span style="font-size: 14.5px;">info@givrex.com</span>
+        <span style="font-size: 14.5px;"><span style="direction: ltr; unicode-bidi: embed; display: inline-block;">+(203) 424-4000</span></span>
       </div>
     </div>
     <div style="border-top: 1px solid rgba(251,247,238,0.14);">
@@ -202,52 +247,55 @@ const EN = {
   cta: "Contact us",
   ctaAlt: "Browse products",
   nav: [
-    { label: "Products", href: P, color: DIM, rule: "none" },
+    { label: "Products", href: "Givrex%20Products.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Certifications", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Recipes", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "News & Fairs", href: "Givrex%20News.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
     { label: "About us", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
-    { label: "Export reach", href: L + "#export", color: DIM, rule: "none" },
-    { label: "Contact", href: L + "#quote", color: DIM, rule: "none" }
+    { label: "Export reach", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Contact", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
   ],
   pageEyebrow: "About us",
-  pageTitle: "A family company that has frozen Egyptian produce since 1978",
-  pageSub: "Givrex processes and freezes fruit and vegetables in Alexandria and ships more than 90% of its output to importers, distributors and wholesale buyers abroad.",
-  storyEyebrow: "Our story",
-  storyTitle: "Forty-five years on the same fields",
-  storyP1: "Givrex began in 1978 as a single freezing operation in Alexandria, supplying artichokes to European importers. The product range grew with demand, but the working method did not change: control the crop, freeze it fast, and ship exactly what was specified.",
-  storyP2: "The same family has owned and run the company ever since, now in its second generation. The people who set the specification are the people who own the business, which is why buyers deal with decision makers rather than intermediaries.",
-  storyP3: "Today the range covers vegetables, fruits, ready-to-eat soups and prepared foods, sold in more than twenty markets across Europe, North America, the Gulf and Asia-Pacific.",
+  pageTitle: "Givrex is privately owned by the Mansour family in Alexandria, Egypt",
+  pageSub: "Specialized since 1978 in the production and export of all types of Egyptian frozen fruits and vegetables, all highly selected and of finest quality.",
+  storyEyebrow: "Company profile",
+  storyTitle: "Established in Alexandria, Egypt in 1978",
+  storyP1: "Givrex factory was established in Alexandria, Egypt in 1978, built on the many years of experience acquired by its founder Mr. Robert Mansour. He directed since the fifties and year after year all his efforts in his country towards increasing the production of frozen fruits and vegetables while maintaining the highest standards of quality.",
+  storyP2: "These efforts have earned him a prominent place and an excellent reputation abroad as well as in Egypt for the fine quality of the different varieties of frozen products made available by Givrex. The primary concern of Givrex is the final consumer, and its founder always had the same motto: \u201cIf you have to do something, do it well, otherwise, don't do it at all.\u201d This is what new generations are being taught in all places and sectors of Givrex.",
+  storyP3: "The raw materials which Givrex uses for processing are grown mostly in the fertile Nile Delta. Blessed with rich, fertile soil, this region is very suitable to growing superior products for processing. Givrex inspects its raw materials carefully to ensure that they meet strict standards of freshness and cleanliness.",
   howEyebrow: "How we work",
-  howTitle: "Four commitments behind every shipment",
+  howTitle: "A family business, developed and renewed every year",
   how: [
-    { num: "01", title: "Contract farming", body: "We work the same Nile Delta farms season after season, set the maturity windows ourselves and follow each crop from planting through harvest." },
-    { num: "02", title: "Frozen on harvest day", body: "Produce reaches the plant within hours and is washed, graded and individually quick-frozen the same day, so texture, colour and yield hold to destination." },
-    { num: "03", title: "Packed to buyer spec", body: "Retail, catering and industrial formats, with labelling and documentation prepared for the destination market rather than adapted after the fact." },
-    { num: "04", title: "One standard, every range", body: "Vegetables, fruits, soups and prepared foods are held to the same grading and specification discipline, whatever the volume." }
+    { num: "01", title: "Raw materials from the Nile Delta", body: "The raw materials which Givrex uses for processing are grown mostly in the fertile Nile Delta, a region very suitable to growing superior products for processing." },
+    { num: "02", title: "Careful inspection", body: "Givrex inspects its raw materials carefully to ensure that they meet strict standards of freshness and cleanliness." },
+    { num: "03", title: "Privately operated by the Mansour family", body: "This family business constantly perseveres with the highest level of service to achieve an exceptional, distinctive production." },
+    { num: "04", title: "Qualified agronoms, engineers and technicians", body: "Since its establishment, the factory has been consistently developed and renewed every year using the best materials and a selected group of experienced workers." }
   ],
-  credEyebrow: "Why buyers stay",
-  credTitle: "Specification discipline, proven over decades",
+  credEyebrow: "Givrex on request",
+  credTitle: "A distinguished level of production that meets the best international criterias",
   credentials: [
-    "The oldest artichoke producer in the Middle East",
-    "Up to ten processed artichoke varieties",
-    "Individually quick-frozen on the day of harvest",
-    "Contract farming across the Nile Delta",
-    "Retail, catering and industrial pack formats",
-    "Documentation and labelling per destination market"
+    "The oldest company in the Middle East producing artichokes",
+    "Up to 10 artichoke varieties, from bottoms to hearts and quarters",
+    "More than 45 years of progress and development",
+    "Raw materials grown mostly in the fertile Nile Delta",
+    "Private label packaging and packages in various sizes",
+    "Client-oriented specifications with regard to our products"
   ],
   showsEyebrow: "Where to meet us",
-  showsTitle: "We exhibit every year",
-  showsBody: "Our export team meets buyers at the two trade fairs that matter most to our markets. Book a meeting ahead of either show and we will bring samples for your range.",
+  showsTitle: "Givrex is present in the main international fairs",
+  showsBody: "It is always a pleasure to receive you in our stand in upcoming international exhibitions. We are regular participants in exhibitions worldwide, whether in America, Europe, the Middle East or the Far East.",
   showCards: [
-    { place: "Paris, France", name: "SIAL", note: "Meet the export team and review the full frozen range with samples." },
-    { place: "Cologne, Germany", name: "Anuga", note: "Specification and pack format discussions for European and Gulf buyers." }
+    { place: "Paris, France", name: "SIAL", note: "A regular Givrex stand, most recently in 2018, and through 2008, 2012 and 2014." },
+    { place: "Cologne, Germany", name: "Anuga", note: "A regular Givrex stand, most recently in 2019, and through 2009, 2013 and 2015." }
   ],
-  ctaEyebrow: "Trade enquiries",
-  ctaTitle: "Let's talk about your range and volume",
-  ctaSub: "We reply within two working days with specifications, pack options and FOB Alexandria pricing.",
+  ctaEyebrow: "Contact us",
+  ctaTitle: "Your questions and comments are important to us",
+  ctaSub: "Please contact us by email and we will get back to you as soon as possible. Givrex would be delighted at all times to comply with any inquiries or requests.",
   footerAddress: "Givrex\nAlexandria, Egypt",
   footerShowsLabel: "We exhibit at",
   shows: ["SIAL, Paris", "Anuga, Cologne"],
   footerNavLabel: "Site",
-  footerContactLabel: "Export enquiries",
+  footerContactLabel: "Contact us",
   footerLegal: "© 2026 Givrex. All rights reserved."
 };
 
@@ -256,10 +304,13 @@ const AR = {
   cta: "تواصل معنا",
   ctaAlt: "استعرض منتجاتنا",
   nav: [
-    { label: "منتجاتنا", href: P, color: DIM, rule: "none" },
+    { label: "منتجاتنا", href: "Givrex%20Products.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "الشهادات", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "وصفات", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "الأخبار والمعارض", href: "Givrex%20News.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
     { label: "عن الشركة", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
-    { label: "أسواق التصدير", href: L + "#export", color: DIM, rule: "none" },
-    { label: "تواصل معنا", href: L + "#quote", color: DIM, rule: "none" }
+    { label: "أسواق التصدير", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "تواصل معنا", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
   ],
   pageEyebrow: "عن الشركة",
   pageTitle: "شركة عائلية تجمّد المحصول المصري منذ ١٩٧٨",
@@ -305,18 +356,101 @@ const AR = {
   footerLegal: "© ٢٠٢٦ جيفركس. جميع الحقوق محفوظة."
 };
 
+const FR = {
+  cta: "Contactez-nous",
+  ctaAlt: "Voir nos produits",
+  nav: [
+    { label: "Produits", href: "Givrex%20Products.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Certifications", href: "Givrex%20Certifications.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Recettes", href: "Givrex%20Recipes.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Actualités", href: "Givrex%20News.dc.html", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "À propos", href: "#top", color: "#E0B14E", rule: "2px solid #E0B14E" },
+    { label: "Exportation", href: "Givrex%20Landing.dc.html#export", color: "rgba(251,247,238,0.82)", rule: "none" },
+    { label: "Contact", href: "Givrex%20Landing.dc.html#quote", color: "rgba(251,247,238,0.82)", rule: "none" }
+  ],
+  pageEyebrow: "À propos",
+  pageTitle: "Une entreprise familiale qui surgèle les produits égyptiens depuis 1978",
+  pageSub: "Givrex transforme et surgèle fruits et légumes à Alexandrie et exporte plus de 90 % de sa production vers des importateurs, des distributeurs et des grossistes à l'étranger.",
+  storyEyebrow: "Notre histoire",
+  storyTitle: "Quarante-cinq ans sur les mêmes terres",
+  storyP1: "Givrex a débuté en 1978 avec une seule unité de surgélation à Alexandrie, fournissant des artichauts aux importateurs européens. La gamme s'est élargie avec la demande, mais la méthode de travail n'a pas changé : maîtriser la culture, la surgeler vite et livrer exactement ce qui a été spécifié.",
+  storyP2: "La même famille détient et dirige l'entreprise depuis lors, aujourd'hui à la deuxième génération. Ceux qui fixent le cahier des charges sont ceux qui possèdent l'entreprise : les acheteurs traitent donc avec des décideurs, non avec des intermédiaires.",
+  storyP3: "La gamme couvre aujourd'hui les légumes, les fruits, les soupes prêtes à consommer et les plats préparés, vendus sur plus de vingt marchés en Europe, en Amérique du Nord, dans le Golfe et en Asie-Pacifique.",
+  howEyebrow: "Notre façon de travailler",
+  howTitle: "Quatre engagements derrière chaque expédition",
+  how: [
+    { num: "01", title: "Agriculture sous contrat", body: "Nous travaillons les mêmes exploitations du delta du Nil saison après saison, fixons nous-mêmes les fenêtres de maturité et suivons chaque culture du semis à la récolte." },
+    { num: "02", title: "Surgelé le jour de la récolte", body: "Le produit arrive à l'usine en quelques heures : il est lavé, calibré et surgelé individuellement le jour même, pour préserver texture, couleur et rendement jusqu'à destination." },
+    { num: "03", title: "Conditionné selon le cahier des charges", body: "Formats détail, restauration et industriel, avec étiquetage et documents préparés pour le marché de destination plutôt qu'adaptés après coup." },
+    { num: "04", title: "Un seul standard, toutes les gammes", body: "Légumes, fruits, soupes et plats préparés répondent à la même exigence de calibrage et de spécification, quel que soit le volume." }
+  ],
+  credEyebrow: "Pourquoi nos clients restent",
+  credTitle: "Une rigueur de spécification éprouvée depuis des décennies",
+  credentials: [
+    "Le plus ancien producteur d'artichauts du Moyen-Orient",
+    "Jusqu'à dix variétés d'artichaut transformées",
+    "Surgélation individuelle le jour de la récolte",
+    "Agriculture sous contrat dans tout le delta du Nil",
+    "Formats détail, restauration et industriel",
+    "Documents et étiquetage adaptés à chaque marché de destination"
+  ],
+  showsEyebrow: "Où nous rencontrer",
+  showsTitle: "Nous exposons chaque année",
+  showsBody: "Notre équipe export rencontre les acheteurs sur les deux salons les plus importants pour nos marchés. Prenez rendez-vous avant l'un ou l'autre et nous apporterons des échantillons de votre gamme.",
+  showCards: [
+    { place: "Paris, France", name: "SIAL", note: "Rencontrez l'équipe export et passez en revue toute la gamme surgelée avec des échantillons." },
+    { place: "Cologne, Allemagne", name: "Anuga", note: "Discussions sur les spécifications et les formats pour les acheteurs européens et du Golfe." }
+  ],
+  ctaEyebrow: "Demandes professionnelles",
+  ctaTitle: "Parlons de votre gamme et de vos volumes",
+  ctaSub: "Nous répondons sous deux jours ouvrés avec les spécifications, les formats et un prix FOB Alexandrie.",
+  footerAddress: "Givrex\nAlexandrie, Égypte",
+  footerShowsLabel: "Nous exposons à",
+  shows: ["SIAL, Paris", "Anuga, Cologne"],
+  footerNavLabel: "Site",
+  footerContactLabel: "Demandes export",
+  footerLegal: "© 2026 Givrex. Tous droits réservés."
+};
+
+const DICT = { en: EN, ar: AR, fr: FR };
+const LANGS = ["en", "ar", "fr"];
+const LANG_LABELS = { en: "EN", ar: "ع", fr: "FR" };
+
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { lang: props.lang === "ar" ? "ar" : "en" };
+    this.syncWidth = () => {
+      const wide = window.innerWidth >= 940;
+      if (wide !== this.state.wide) this.setState({ wide, menuOpen: false });
+    };
+    this.state = { wide: true, menuOpen: false,
+      langOpen: false, langOpen: false, lang: LANGS.indexOf(props.lang) >= 0 ? props.lang : "en" };
+  }
+  componentDidMount() {
+    this.syncWidth();
+    window.addEventListener("resize", this.syncWidth);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.syncWidth);
   }
   renderVals() {
     const lang = this.state.lang;
     return {
       lang,
       dir: lang === "ar" ? "rtl" : "ltr",
-      t: lang === "ar" ? AR : EN,
-      toggleLang: () => this.setState(s => ({ lang: s.lang === "ar" ? "en" : "ar" }))
+      t: (DICT[lang] || EN),
+      wide: this.state.wide,
+      narrow: !this.state.wide,
+      menuOpen: !this.state.wide && this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      langOpen: this.state.langOpen,
+      langLabel: { en: "English", ar: "العربية", fr: "Français" }[lang],
+      isEn: lang === "en", isFr: lang === "fr", isAr: lang === "ar",
+      toggleLangMenu: () => this.setState(s => ({ langOpen: !s.langOpen })),
+      langEn: { on: () => this.setState({ lang: "en", langOpen: false }), bg: lang === "en" ? "#E7EFE4" : "transparent", weight: lang === "en" ? 700 : 500 },
+      langFr: { on: () => this.setState({ lang: "fr", langOpen: false }), bg: lang === "fr" ? "#E7EFE4" : "transparent", weight: lang === "fr" ? 700 : 500 },
+      langAr: { on: () => this.setState({ lang: "ar", langOpen: false }), bg: lang === "ar" ? "#E7EFE4" : "transparent", weight: lang === "ar" ? 700 : 500 }
     };
   }
 }
