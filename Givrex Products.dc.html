@@ -506,8 +506,10 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(226px, 1fr)); gap: 20px;">
           <sc-for list="{{ g2.products }}" as="p" hint-placeholder-count="4">
             <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 18px; overflow: hidden; box-shadow: 0 10px 28px rgba(22,41,31,0.06);" style-hover="border-color: rgba(30,58,43,0.3); box-shadow: 0 16px 38px rgba(22,41,31,0.12);">
-              <div style="aspect-ratio: 4 / 3; position: relative; overflow: hidden; background: #F4F0E1;">
-                <image-slot id="{{ p.slot }}" shape="rect" fit="cover" placeholder="{{ p.photo }}"></image-slot>
+              <div style="aspect-ratio: 4 / 3; position: relative; overflow: hidden; background: linear-gradient(160deg, #F6F2E4 0%, #E8E2C9 100%); display: flex; align-items: center; justify-content: center; padding: 14px;">
+                <sc-if value="{{ p.hasPack }}" hint-placeholder-val="{{ false }}">
+                  <img src="{{ p.pack }}" alt="{{ p.name }}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; margin: auto; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(22,41,31,0.22));" />
+                </sc-if>
               </div>
               <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 9px; flex: 1;">
                 <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8A6516;">{{ p.tag }}</span>
@@ -527,7 +529,7 @@
       <section id="meals" style="max-width: 1240px; margin: 0 auto; padding: 56px 28px 8px;">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; align-items: center; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(22,41,31,0.07);">
           <div style="aspect-ratio: 16 / 9; overflow: hidden; background: #F3EBD9;">
-            <img src="assets/cat-meals.jpeg" alt="{{ g3.name }}" style="width: 100%; height: 100%; object-fit: cover; object-position: 0% 50%; display: block;" />
+            <img src="assets/cat-meals.jpeg" alt="{{ g3.name }}" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; display: block;" />
           </div>
           <div style="display: flex; flex-direction: column; gap: 12px; padding: 28px 32px 30px;">
             <h2 style="margin: 0; font-family: 'Lora', 'Cairo', serif; font-weight: 600; font-size: clamp(26px, 3vw, 36px); line-height: 1.14; letter-spacing: -0.015em;">{{ g3.name }}</h2>
@@ -548,7 +550,7 @@
               <a href="{{ falafel.href }}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: #1E3A2B; color: #FBF7EE; padding: 10px 20px; border-radius: 999px; font-size: 13.5px; font-weight: 600; margin-top: 6px;" style-hover="background: #B08A2E; color: #16291F;">{{ t.viewProduct }}<span style="font-size: 15px;">→</span></a>
             </div>
           </div>
-          <sc-for list="{{ g3.rest }}" as="p" hint-placeholder-count="1">
+          <sc-for list="{{ g3.rest }}" as="p" hint-placeholder-count="0">
             <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(30,58,43,0.1); border-radius: 18px; overflow: hidden; box-shadow: 0 10px 28px rgba(22,41,31,0.06);" style-hover="border-color: rgba(30,58,43,0.3); box-shadow: 0 16px 38px rgba(22,41,31,0.12);">
               <div style="aspect-ratio: 4 / 3; position: relative; overflow: hidden; background: #F3EBD9;">
                 <image-slot id="{{ p.slot }}" shape="rect" fit="cover" placeholder="{{ p.photo }}"></image-slot>
@@ -663,8 +665,7 @@ const EN = {
         { name: "Peeled Broad Beans", note: "Egypt is a large producer of broad beans and hundreds of tons are exported by Givrex every year. Supplied peeled (skinless) or non peeled (with skin).", tag: "IQF", accent: GREEN, feat: true },
         { name: "Green Beans", note: "When this product reaches Givrex it must be tender and completely rounded over its entire length, free of any filaments, parasites or insect damage. Whole or cut.", tag: "IQF", accent: GREEN, feat: true },
         { name: "Taro / Colocasia", note: "Of medium size for optimal quality. The cutting is carried out mechanically and the washing carefully done to avoid affecting the taste. The bag includes other assorted greenery carefully chopped to make cooking easier.", tag: "IQF", accent: GREEN, feat: true },
-        { name: "Artichokes in Halves and Quarters", note: "Premium selected Egyptian artichokes of AAA quality, cut in halves and quarters for cooking and ready meals.", tag: "IQF", accent: GREEN, feat: true },
-        { name: "Artichoke Slices, Dices and Triangles", note: "Slices and triangles for pizzas and salads, dices for topping or dipping, all from premium selected Egyptian artichokes.", tag: "IQF", accent: GREEN }
+        { name: "Artichokes in Halves and Quarters", note: "Premium selected Egyptian artichokes of AAA quality, cut in halves and quarters for cooking and ready meals.", tag: "IQF", accent: GREEN, feat: true }
       ]
     },
     {
@@ -697,11 +698,10 @@ const EN = {
     },
     {
       id: "meals", eyebrow: "Category 04", name: "Ready Meals",
-      photo: "assets/cat-meals.jpeg", pos: "0% 50%",
+      photo: "assets/cat-meals.jpeg", pos: "50% 50%",
       body: "Ready to heat and eat products, all of them suitable for a vegan diet.",
       products: [
-        { name: "Semi Fried Falafel", note: "Carefully selected ingredients, garlic, fresh herbs and condiments are skillfully minced into a homogenous paste, formed into uniform patties and semi-fried until golden brown. Ready to heat and eat, and suitable for a vegan diet.", tag: "Ready to cook", accent: WHEAT },
-        { name: "Pastes", note: "The falafel paste is a mixture of broad beans and vegetables carefully seasoned, the vegetarians favourite meal and an ideal filling for sandwiches. The range also includes mashed artichokes, potatoes and sweet potatoes.", tag: "To specification", accent: WHEAT }
+        { name: "Semi Fried Falafel", note: "Carefully selected ingredients, garlic, fresh herbs and condiments are skillfully minced into a homogenous paste, formed into uniform patties and semi-fried until golden brown. Ready to heat and eat, and suitable for a vegan diet.", tag: "Ready to cook", accent: WHEAT }
       ]
     }
   ],
@@ -759,8 +759,7 @@ const AR = {
         { name: "فول مقشّر", note: "يُقشَّر ويُفرز قبل التجميد. عبوة ٤٠٠ جرام للتجزئة وعبوات كبيرة.", tag: "تجميد سريع", accent: GREEN, feat: true },
         { name: "فاصوليا خضراء مقطعة", note: "مقطّعة ومسلوقة. عبوة ٤٠٠ جرام للتجزئة وعبوات كبيرة.", tag: "تجميد سريع", accent: GREEN, feat: true },
         { name: "قلقاس مقشر ومقطع", note: "مقشّر ومقطّع وجاهز للطهي. عبوة ٤٠٠ جرام للتجزئة وعبوات كبيرة.", tag: "تجميد سريع", accent: GREEN, feat: true },
-        { name: "خرشوف أرباع", note: "قلوب منظّفة مقطّعة إلى أرباع. عبوة ٤٠٠ جرام للتجزئة وعبوات كبيرة.", tag: "تجميد سريع", accent: GREEN, feat: true },
-        { name: "أصناف الخرشوف", note: "أنصاف وأرباع ومكعبات ومثلثات حسب المواصفة.", tag: "تجميد سريع", accent: GREEN }
+        { name: "خرشوف أرباع", note: "قلوب منظّفة مقطّعة إلى أرباع. عبوة ٤٠٠ جرام للتجزئة وعبوات كبيرة.", tag: "تجميد سريع", accent: GREEN, feat: true }
       ]
     },
     {
@@ -793,11 +792,10 @@ const AR = {
     },
     {
       id: "meals", eyebrow: "الفئة ٠٤", name: "أطباق جاهزة",
-      photo: "assets/cat-meals.jpeg", pos: "0% 50%",
-      body: "منتجات مجمّدة ذات قيمة مضافة لقطاع التغذية والتجزئة.",
+      photo: "assets/cat-meals.jpeg", pos: "50% 50%",
+      body: "منتجات جاهزة للتسخين والتناول، وكلها تصلح للنظام النباتي.",
       products: [
-        { name: "طعمية", note: "أقراص مقسّمة، تُقلى أو تُخبز من المجمّد.", tag: "جاهزة للطهي", accent: WHEAT },
-        { name: "منتجات ذات قيمة مضافة", note: "خطوط مجمّدة تُطوَّر حسب طلب العميل.", tag: "حسب المواصفة", accent: WHEAT }
+        { name: "طعمية", note: "أقراص مقسّمة، تُقلى أو تُخبز من المجمّد.", tag: "جاهزة للطهي", accent: WHEAT }
       ]
     }
   ],
@@ -854,8 +852,7 @@ const FR = {
         { name: "Fèves épluchées", note: "L'Égypte est un grand producteur de fèves et Givrex en exporte des centaines de tonnes chaque année. Proposées épluchées (sans peau) ou non épluchées (avec peau).", tag: "IQF", accent: GREEN, feat: true },
         { name: "Haricots verts", note: "À leur arrivée chez Givrex, les haricots doivent être tendres et parfaitement ronds sur toute leur longueur, sans filaments, parasites ni dégâts d'insectes. Entiers ou coupés.", tag: "IQF", accent: GREEN, feat: true },
         { name: "Taro / Colocase", note: "De taille moyenne pour une qualité optimale. La coupe est mécanique et le lavage soigneusement réalisé pour ne pas altérer le goût. Le sachet contient d'autres verdures assorties finement hachées pour faciliter la cuisson.", tag: "IQF", accent: GREEN, feat: true },
-        { name: "Artichauts en moitiés et quartiers", note: "Artichauts égyptiens sélectionnés de qualité AAA, coupés en moitiés et en quartiers pour la cuisine et les plats préparés.", tag: "IQF", accent: GREEN, feat: true },
-        { name: "Artichauts en tranches, dés et triangles", note: "Tranches et triangles pour pizzas et salades, dés pour garnitures et dips, tous issus d'artichauts égyptiens sélectionnés.", tag: "IQF", accent: GREEN }
+        { name: "Artichauts en moitiés et quartiers", note: "Artichauts égyptiens sélectionnés de qualité AAA, coupés en moitiés et en quartiers pour la cuisine et les plats préparés.", tag: "IQF", accent: GREEN, feat: true }
       ]
     },
     {
@@ -888,11 +885,10 @@ const FR = {
     },
     {
       id: "meals", eyebrow: "Catégorie 04", name: "Plats préparés",
-      photo: "assets/cat-meals.jpeg", pos: "0% 50%",
+      photo: "assets/cat-meals.jpeg", pos: "50% 50%",
       body: "Des produits prêts à réchauffer, tous adaptés à un régime végétalien.",
       products: [
-        { name: "Falafel semi-frit", note: "Des ingrédients soigneusement sélectionnés, de l'ail, des herbes fraîches et des condiments sont habilement hachés en une pâte homogène, façonnés en galettes uniformes et semi-frits jusqu'à une belle coloration dorée. Prêt à réchauffer et convient à un régime végétalien.", tag: "Prêt à cuire", accent: WHEAT },
-        { name: "Pâtes", note: "La pâte à falafel est un mélange de fèves et de légumes soigneusement assaisonné, le plat préféré des végétariens et une garniture idéale pour les sandwichs. La gamme comprend aussi les purées d'artichaut, de pomme de terre et de patate douce.", tag: "Sur cahier des charges", accent: WHEAT }
+        { name: "Falafel semi-frit", note: "Des ingrédients soigneusement sélectionnés, de l'ail, des herbes fraîches et des condiments sont habilement hachés en une pâte homogène, façonnés en galettes uniformes et semi-frits jusqu'à une belle coloration dorée. Prêt à réchauffer et convient à un régime végétalien.", tag: "Prêt à cuire", accent: WHEAT }
       ]
     }
   ],
@@ -909,15 +905,21 @@ const FR = {
 };
 
 const SLUGS = {
-  veg: ["okra-special","minced-molokhia","mixed-vegetables","artichoke-bottoms","green-peas","broccoli-florets","cauliflower-florets","sweet-corn","sweet-potatoes","gourmet-turned-vegetables","grilled-eggplant","chopped-spinach","diced-onions","artichoke-hearts","peeled-fava-beans","cut-green-beans","peeled-and-cut-taro","artichoke-quarters","artichoke-cuts"],
+  veg: ["okra-special","minced-molokhia","mixed-vegetables","artichoke-bottoms","green-peas","broccoli-florets","cauliflower-florets","sweet-corn","sweet-potatoes","gourmet-turned-vegetables","grilled-eggplant","chopped-spinach","diced-onions","artichoke-hearts","peeled-fava-beans","cut-green-beans","peeled-and-cut-taro","artichoke-quarters"],
   fruit: ["strawberries","apricots-earlet","pomegranate-arils","red-figs","guava","mango","dates-zaghloul","dates-samani","mango-pulp","guava-pulp"],
   soup: ["artichoke-cream-soup","lentil-cream-soup","broccoli-cream-soup","leek-cream-soup"],
-  meal: ["falafel","value-added-items"]
+  meal: ["falafel"]
+};
+
+const PACK_IMGS = {
+  soup: ["p-artichoke-cream-soup", "p-lentil-cream-soup", "p-broccoli-cream-soup", "p-leek-cream-soup"]
 };
 
 const withSlots = (g, key, lang) => Object.assign({}, g, {
   products: g.products.map((p, i) => Object.assign({}, p, {
     slot: "givrex-" + key + "-" + i,
+    pack: (PACK_IMGS[key] || [])[i] ? "assets/" + PACK_IMGS[key][i] + ".png" : null,
+    hasPack: !!(PACK_IMGS[key] || [])[i],
     href: "Givrex%20Product.dc.html?p=" + SLUGS[key][i] + (lang === "en" ? "" : "&lang=" + lang),
     tag: g.name,
     photo: ({ ar: "أضف صورة: ", fr: "Photo : " }[lang] || "Drop photo: ") + p.name
@@ -940,7 +942,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.syncWidth = () => {
-      const wide = window.innerWidth >= 940;
+      const wide = window.innerWidth >= 1140;
       if (wide !== this.state.wide) this.setState({ wide, menuOpen: false });
     };
     this.state = { wide: true, menuOpen: false,

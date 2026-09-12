@@ -307,23 +307,6 @@ export const PRODUCTS = [
     "img": "p-artichoke-quarters"
   },
   {
-    "slug": "artichoke-cuts",
-    "catFr": "Légumes surgelés",
-    "nameFr": "Artichauts en tranches, dés et triangles",
-    "noteFr": "Tranches et triangles pour pizzas et salades, dés pour garnitures et dips, tous issus d'artichauts égyptiens sélectionnés.",
-    "tagFr": "IQF",
-    "catId": "vegetables",
-    "cat": "Frozen Vegetables",
-    "catAr": "خضروات مجمّدة",
-    "name": "Artichoke Slices, Dices and Triangles",
-    "nameAr": "أصناف الخرشوف",
-    "note": "Slices and triangles for pizzas and salads, dices for topping or dipping, all from premium selected Egyptian artichokes.",
-    "noteAr": "أنصاف وأرباع ومكعبات ومثلثات حسب المواصفة.",
-    "tag": "IQF",
-    "tagAr": "تجميد سريع",
-    "img": null
-  },
-  {
     "slug": "strawberries",
     "catFr": "Fruits surgelés",
     "nameFr": "Fraises",
@@ -508,7 +491,7 @@ export const PRODUCTS = [
     "noteAr": "محضّرة ومجمّدة وجاهزة للتسخين.",
     "tag": "Ready to eat",
     "tagAr": "جاهزة للتناول",
-    "img": null
+    "img": "p-artichoke-cream-soup"
   },
   {
     "slug": "lentil-cream-soup",
@@ -525,7 +508,7 @@ export const PRODUCTS = [
     "noteAr": "محضّرة ومجمّدة وجاهزة للتسخين.",
     "tag": "Ready to eat",
     "tagAr": "جاهزة للتناول",
-    "img": null
+    "img": "p-lentil-cream-soup"
   },
   {
     "slug": "broccoli-cream-soup",
@@ -542,7 +525,7 @@ export const PRODUCTS = [
     "noteAr": "محضّرة ومجمّدة وجاهزة للتسخين.",
     "tag": "Ready to eat",
     "tagAr": "جاهزة للتناول",
-    "img": null
+    "img": "p-broccoli-cream-soup"
   },
   {
     "slug": "leek-cream-soup",
@@ -559,7 +542,7 @@ export const PRODUCTS = [
     "noteAr": "محضّرة ومجمّدة وجاهزة للتسخين.",
     "tag": "Ready to eat",
     "tagAr": "جاهزة للتناول",
-    "img": null
+    "img": "p-leek-cream-soup"
   },
   {
     "slug": "falafel",
@@ -577,23 +560,6 @@ export const PRODUCTS = [
     "tag": "Ready to cook",
     "tagAr": "جاهزة للطهي",
     "img": "pack-falafel"
-  },
-  {
-    "slug": "value-added-items",
-    "catFr": "Plats préparés",
-    "nameFr": "Pâtes",
-    "noteFr": "La pâte à falafel est un mélange de fèves et de légumes soigneusement assaisonné, le plat préféré des végétariens et une garniture idéale pour les sandwichs. La gamme comprend aussi les purées d'artichaut, de pomme de terre et de patate douce.",
-    "tagFr": "Sur cahier des charges",
-    "catId": "meals",
-    "cat": "Ready Meals",
-    "catAr": "أطباق جاهزة",
-    "name": "Pastes",
-    "nameAr": "منتجات ذات قيمة مضافة",
-    "note": "The falafel paste is a mixture of broad beans and vegetables carefully seasoned, the vegetarians favourite meal and an ideal filling for sandwiches. The range also includes mashed artichokes, potatoes and sweet potatoes.",
-    "noteAr": "خطوط مجمّدة تُطوَّر حسب طلب العميل.",
-    "tag": "To specification",
-    "tagAr": "حسب المواصفة",
-    "img": null
   }
 ];
 

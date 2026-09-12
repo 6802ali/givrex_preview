@@ -420,7 +420,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.syncWidth = () => {
-      const wide = window.innerWidth >= 940;
+      const wide = window.innerWidth >= 1140;
       if (wide !== this.state.wide) this.setState({ wide, menuOpen: false });
     };
     this.state = { wide: true, menuOpen: false,

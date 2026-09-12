@@ -133,8 +133,12 @@ function render(countries) {
     routes.append("circle").attr("cx", p[0]).attr("cy", p[1]).attr("r", 3)
       .attr("fill", "#E0B14E");
     if (d.gulf !== undefined) {
-      const lx = o[0] + Math.max(96, Math.min(190, W * 0.17));
-      const ly = o[1] + 34 * k + d.gulf * (19 * k);
+      // Stack the Gulf and Levant labels in open water below Africa, well clear of
+      // Australia, so they stay legible when the map narrows.
+      const base = projection([-23, -6]);
+      const step = 17 * k;
+      const lx = base[0];
+      const ly = Math.min(base[1] + d.gulf * step, H - 8 - (5 - d.gulf) * step);
       routes.append("path")
         .attr("d", `M${p[0]},${p[1]} L${lx - 8},${ly - 4}`)
         .attr("fill", "none").attr("stroke", "rgba(251,247,238,0.32)").attr("stroke-width", 0.7);
